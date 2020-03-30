@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { Switch, Route, withRouter } from "react-router-dom";
+
+import { VendorRegistration } from "./containers/Registration/VendorRegistration";
+import { CustomerRegistration } from "./containers/Registration/CustomerRegistration";
+
+import "./App.css";
 
 function App() {
+  useEffect(() => {
+    // window.location.pathname === "/" ? setHome(true) : setHome(false);
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* <Nav /> */}
+      <Switch>
+        <Route exact path="/">
+          {/* <Home /> */}
+        </Route>
+        <Route path="/registration/vendor">
+          <VendorRegistration />
+        </Route>
+        <Route path="/registration/customer">
+          <CustomerRegistration />
+        </Route>
+      </Switch>
+    </>
   );
 }
 
-export default App;
+export default withRouter(App);
