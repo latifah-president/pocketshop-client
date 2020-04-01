@@ -3,7 +3,7 @@ import { Switch, Route, withRouter } from "react-router-dom";
 
 import { VendorRegistration } from "./containers/Registration/VendorRegistration";
 import { CustomerRegistration } from "./containers/Registration/CustomerRegistration";
-
+import { Products } from "./containers/Products/Products";
 import "./App.css";
 
 function App() {
@@ -17,6 +17,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           {/* <Home /> */}
+        </Route>
+        <Route path="/products">
+          <Products />
         </Route>
         <Route path="/registration/vendor">
           <VendorRegistration />

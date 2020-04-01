@@ -1,0 +1,25 @@
+.products-header {
+  margin: 30px 10vw 30px 10vw;
+  display: inline-flex;
+}
+
+.grid-cols-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  position: relative;
+  margin: 30px 10vw 30px 10vw;
+}
+
+.product-card {
+  background-color: beige;
+  border: solid 2px white;
+  width: 100%;
+}
+
+.product-details {
+  margin: 10%;
+}
+
+.add-to-cart-button {
+  text-align: center;
+}

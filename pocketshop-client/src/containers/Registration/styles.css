@@ -38,7 +38,7 @@ button.ghost {
 button.ghost:hover {
   background-color: var(--light-blue);
 }
-
+/* 
 form {
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -48,17 +48,7 @@ form {
   padding: 0 50px;
   height: 100%;
   text-align: center;
-}
-
-input {
-  background-color: rgb(255, 255, 255);
-  border: 2px solid rgb(67, 164, 224);
-  border-radius: 10px;
-  padding: 12px 15px;
-  margin: 8px 0;
-  width: 100%;
-  display: block;
-}
+} */
 
 .input-error {
   background-color: rgb(255, 255, 255);
@@ -81,15 +71,21 @@ input {
 }
 
 .form-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   height: 100%;
   transition: all 0.6s ease-in-out;
+  justify-content: center;
+  align-items: center;
 }
 
 .sign-in-container {
   left: 0;
   width: 50%;
+  /* opacity: 0; */
   z-index: 2;
 }
 
