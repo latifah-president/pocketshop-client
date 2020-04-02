@@ -8,8 +8,11 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 
-import { SignUpForm, SignInForm } from "./Form";
-import { SignInOverlay } from "./Overlay";
+import {
+  SignUpForm,
+  SignInForm
+} from "../../containers/RegistrationFormContainer/RegistrationFormContainer";
+import { RegistrationFormOverlay } from "../../components/RegistrationFormOverlay/RegistrationFormOverlay";
 
 import history from "../../history";
 
@@ -34,13 +37,13 @@ const useStyles = makeStyles(theme => ({
 
 const handleSubmit = () => {};
 
-export const VendorRegistration = () => {
+export const CustomerRegistrationPage = () => {
   const classes = useStyles();
   return (
     <div className="registration-container" id="container">
       <SignUpForm handleSubmit={handleSubmit} />
       <SignInForm handleSubmit={handleSubmit} />
-      <SignInOverlay></SignInOverlay>
+      <RegistrationFormOverlay></RegistrationFormOverlay>
     </div>
   );
 };

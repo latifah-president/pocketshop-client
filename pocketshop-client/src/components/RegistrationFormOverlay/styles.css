@@ -1,0 +1,75 @@
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+
+.overlay {
+  background: linear-gradient(to right, #40d0e0, rgb(67, 164, 224));
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 0;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.overlay-panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+  transform: translateX(-20%);
+}
+
+.overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.registration-container.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+}
+
+.registration-container.right-panel-active .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: show 0.6s;
+}
+
+.registration-container.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+
+.registration-container.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+
+.registration-container.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
+
+h1 {
+  font-weight: bold;
+  padding-bottom: 1rem;
+}

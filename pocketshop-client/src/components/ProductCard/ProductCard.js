@@ -41,7 +41,6 @@ export const ProductCard = ({ product }) => {
       <div className="product-details">
         {/* <img src={product.imageUrl} alt={product.name}></img> */}
         <div
-          className="product-image"
           style={{
             width: "100%",
             height: "200px",

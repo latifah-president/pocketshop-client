@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 
-import { VendorRegistration } from "./containers/Registration/VendorRegistration";
-import { CustomerRegistration } from "./containers/Registration/CustomerRegistration";
-import { Products } from "./containers/Products/Products";
+import { VendorRegistrationPage } from "./pages/VendorRegistrationPage/VendorRegistrationPage";
+import { CustomerRegistrationPage } from "./pages/CustomerRegistrationPage/CustomerRegistrationPage";
+import { HomePage } from "./pages/HomePage/HomePage";
 import "./App.css";
 
 function App() {
@@ -16,13 +16,13 @@ function App() {
       {/* <Nav /> */}
       <Switch>
         <Route exact path="/">
-          <Products />
+          <HomePage />
         </Route>
         <Route path="/registration/vendor">
-          <VendorRegistration />
+          <VendorRegistrationPage />
         </Route>
         <Route path="/registration/customer">
-          <CustomerRegistration />
+          <CustomerRegistrationPage />
         </Route>
       </Switch>
     </>
