@@ -172,7 +172,7 @@ export const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
           // defaultValue="Hello World"
           variant="outlined"
         /> */}
-          <InputLabel id="demo-simple-select-label">State</InputLabel>
+          <InputLabel>State</InputLabel>
           <Select
             className={classes.selectFieldThin}
             variant="outlined"
@@ -213,7 +213,7 @@ export const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
           />
         </div>
       </FormControl>
-      <button
+      {/* <button
         className="rounded-xxl border border-light-blue bg-dark-blue text-white cursor-pointer text-xs font-bold py-3 px-12 tracking-wide uppercase ease-in duration-75"
         onClick={e => {
           e.preventDefault();
@@ -221,7 +221,10 @@ export const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
         }}
       >
         Sign Up
-      </button>
+      </button> */}
+      <Button variant="contained" color="primary">
+        Sign Up
+      </Button>
     </div>
   );
 };
@@ -249,7 +252,7 @@ export const SignInForm = ({ error, handleErrors, handleSubmit }) => {
         // defaultValue="Hello World"
         variant="outlined"
       />
-      <button
+      {/* <button
         className="rounded-xxl border border-light-blue bg-dark-blue text-white cursor-pointer text-xs font-bold py-3 px-12 tracking-wide uppercase ease-in duration-75"
         onClick={e => {
           e.preventDefault();
@@ -257,7 +260,10 @@ export const SignInForm = ({ error, handleErrors, handleSubmit }) => {
         }}
       >
         Sign In
-      </button>
+      </button> */}
+      <Button variant="contained" color="primary">
+        Sign In
+      </Button>
     </div>
   );
 };
