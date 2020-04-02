@@ -14,6 +14,7 @@ import { ProductCard } from "../../components/ProductCard/ProductCard";
 
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { ProductsContainer } from "../../containers/ProductsContainer/ProductsContainer";
+import { CategoryDropdown } from "../../components/CategoryDropdown/CategoryDropdown";
 
 import "./styles.css";
 
@@ -29,8 +30,8 @@ const useStyles = makeStyles(theme => ({
 
 export const HomePage = () => {
   const classes = useStyles();
-
   const [category, setCategory] = useState("all");
+
   const handleCategoryChange = e => {
     setCategory(e.target.value);
   };
@@ -43,30 +44,11 @@ export const HomePage = () => {
       </div>
       <div className="products-header">
         <SearchBar></SearchBar>
-        <div className="dropdown">
-          <select
-            name="categories"
-            className="dropdown-menu"
-            label="categories"
-            style={
-              category === "all" ? { fontStyle: "italic", color: "grey" } : null
-            }
-            onChange={handleCategoryChange}
-          >
-            <option className="dropdown-label" value="none">
-              Select a category...
-            </option>
-            <option className="dropdown-options" value="food">
-              Food
-            </option>
-            <option className="dropdown-options" value="drug">
-              Drug
-            </option>
-            <option className="dropdown-options" value="toiletry">
-              Toiletry
-            </option>
-          </select>
-        </div>
+        <CategoryDropdown
+          category={category}
+          handleCategoryChange={handleCategoryChange}
+        ></CategoryDropdown>
+
         <Button variant="contained" color="primary">
           <ShoppingCartIcon color="default"></ShoppingCartIcon>
           <span> $0.00 </span>
