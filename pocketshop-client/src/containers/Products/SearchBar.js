@@ -40,8 +40,8 @@ const useStyles = makeStyles(theme => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
-      height: "3ch"
+      width: "300px",
+      height: "2rem"
     },
 
     border: "1px solid grey",

@@ -67,13 +67,17 @@ const useStyles = makeStyles(theme => ({
 export const Products = () => {
   const classes = useStyles();
 
-  const [category, setCategory] = useState("");
-  const handleCategoryChange = () => {};
+  const [category, setCategory] = useState("all");
+  const handleCategoryChange = e => {
+    setCategory(e.target.value);
+  };
+  console.log(category);
+
   return (
     <div>
       <div className="products-header">
         <SearchBar></SearchBar>
-        <FormControl className={classes.formControl} variant="outlined">
+        {/* <FormControl className={classes.formControl} variant="outlined">
           <InputLabel className={classes.formControl}>Categories</InputLabel>
           <Select
             className={classes.formControl}
@@ -88,7 +92,32 @@ export const Products = () => {
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>Thirty</MenuItem>
           </Select>
-        </FormControl>
+        </FormControl> */}
+        <div className="dropdown">
+          <select
+            name="categories"
+            className="dropdown-menu"
+            label="categories"
+            style={
+              category === "all" ? { fontStyle: "italic", color: "grey" } : null
+            }
+            onChange={handleCategoryChange}
+          >
+            <option className="dropdown-label" value="none">
+              Select a category...
+            </option>
+            <option className="dropdown-options" value="food">
+              Food
+            </option>
+            <option className="dropdown-options" value="drug">
+              Drug
+            </option>
+            <option className="dropdown-options" value="toiletry">
+              Toiletry
+            </option>
+          </select>
+        </div>
+
         <Button variant="contained" color="primary">
           <ShoppingCartIcon color="default"></ShoppingCartIcon>
           <span> $0.00 </span>

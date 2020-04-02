@@ -3,6 +3,41 @@
   display: inline-flex;
 }
 
+.dropdown {
+  width: 300px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 8px 8px 8px 8px;
+}
+
+.dropdown-menu {
+  /* display: none; */
+  height: 2rem;
+  width: 284px;
+  border: 1px solid white;
+  background-color: white;
+  /* margin: 8px 8px 8px 0px; */
+}
+
+.dropdown-label {
+  font-size: 13px;
+  font-style: italic;
+  color: red;
+  padding: 10px 8px 10px 14px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  position: relative;
+}
+.dropdown-options {
+  font-size: 13px;
+  padding: 10px 8px 10px 14px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  position: relative;
+}
+
 .grid-cols-4 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
