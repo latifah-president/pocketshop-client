@@ -1,0 +1,13 @@
+.product-card {
+  background-color: beige;
+  border: solid 2px white;
+  width: 100%;
+}
+
+.product-details {
+  margin: 10%;
+}
+
+.add-to-cart-button {
+  text-align: center;
+}

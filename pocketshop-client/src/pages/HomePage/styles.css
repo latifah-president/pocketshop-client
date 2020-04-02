@@ -8,6 +8,7 @@
   border: 1px solid grey;
   border-radius: 4px;
   padding: 8px 8px 8px 8px;
+  margin-right: 16px;
 }
 
 .dropdown-menu {
@@ -16,7 +17,6 @@
   width: 284px;
   border: 1px solid white;
   background-color: white;
-  /* margin: 8px 8px 8px 0px; */
 }
 
 .dropdown-label {
@@ -29,6 +29,7 @@
   border-radius: 6px;
   position: relative;
 }
+
 .dropdown-options {
   font-size: 13px;
   padding: 10px 8px 10px 14px;
@@ -36,25 +37,4 @@
   border: 1px solid #ccc;
   border-radius: 6px;
   position: relative;
-}
-
-.grid-cols-4 {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  position: relative;
-  margin: 30px 10vw 30px 10vw;
-}
-
-.product-card {
-  background-color: beige;
-  border: solid 2px white;
-  width: 100%;
-}
-
-.product-details {
-  margin: 10%;
-}
-
-.add-to-cart-button {
-  text-align: center;
 }
