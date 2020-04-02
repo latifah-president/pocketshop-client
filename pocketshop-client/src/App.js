@@ -16,9 +16,6 @@ function App() {
       {/* <Nav /> */}
       <Switch>
         <Route exact path="/">
-          {/* <Home /> */}
-        </Route>
-        <Route path="/products">
           <Products />
         </Route>
         <Route path="/registration/vendor">
