@@ -48,7 +48,6 @@ export const HomePage = () => {
           category={category}
           handleCategoryChange={handleCategoryChange}
         ></CategoryDropdown>
-
         <Button variant="contained" color="primary">
           <ShoppingCartIcon color="default"></ShoppingCartIcon>
           <span> $0.00 </span>
