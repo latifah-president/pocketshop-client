@@ -149,6 +149,16 @@ export const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
             required
             className={classes.textFieldWide}
             id="outlined-required"
+            // fullWidth
+            label="Password"
+            margin="dense"
+            // defaultValue="Hello World"
+            variant="outlined"
+          />
+          <TextField
+            required
+            className={classes.textFieldWide}
+            id="outlined-required"
             label="Street address"
             margin="dense"
             // defaultValue="Hello World"
