@@ -1,14 +1,14 @@
 {
     "build": {
       "env": {
-        "REACT_APP_apiKey": "@REACT_APP_apiKey",
-        "REACT_APP_AUTH_DOMAIN_authDomain": "@REACT_APP_AUTH_DOMAIN_authDomain",
-        "REACT_APP_databaseURL": "@REACT_APP_databaseURL",
-        "REACT_APP_projectId": "@REACT_APP_projectId",
-        "REACT_APP_storageBucket": "@REACT_APP_storageBucket",
-        "REACT_APP_messagingSenderId": "@REACT_APP_messagingSenderId",
-        "REACT_APP_appId": "@REACT_APP_appId",
-        "REACT_APP_measurementId": "@REACT_APP_measurementId"
+        "REACT_APP_apiKey": "@react_app_apiKey",
+        "REACT_APP_AUTH_DOMAIN_authDomain": "@react_app_auth_domain_authDomain",
+        "REACT_APP_databaseURL": "@react_app_databaseURL",
+        "REACT_APP_projectId": "@react_app_projectId",
+        "REACT_APP_storageBucket": "@react_app_storageBucket",
+        "REACT_APP_messagingSenderId": "@react_app_messagingSenderId",
+        "REACT_APP_appId": "@react_app_appId",
+        "REACT_APP_measurementId": "@react_app_measurementId"
       }
     }
   }
