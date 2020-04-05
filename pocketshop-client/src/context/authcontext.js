@@ -4,7 +4,8 @@ import firebase from './../firebaseconfig';
 
 export const AuthContext = React.createContext();
 export const AuthProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState(null);    
+    const [currentUser, setCurrentUser] = useState(null); 
+    const [isLoggedIn, setIsLoggedIn] = useState(false)   
     useEffect(() => {
       firebase.auth().onAuthStateChanged((user) => {
           if(user) {
@@ -13,6 +14,7 @@ export const AuthProvider = ({ children }) => {
                   console.log(idToken, 'idtoken')
                   localStorage.setItem('token', idToken, )
                   setCurrentUser(user)
+                  setIsLoggedIn(true)
               })
               .catch(err => {
                   console.log(err.message)
@@ -21,13 +23,15 @@ export const AuthProvider = ({ children }) => {
       });
     }, []);
   
+    console.log("current user from context:", currentUser)
     return (
       <AuthContext.Provider
         value={{
           currentUser,
+          isLoggedIn
         }}
       >
-          {children}
+          {children} 
       </AuthContext.Provider>
     );
   };
