@@ -1,0 +1,14 @@
+{
+    "build": {
+      "env": {
+        "REACT_APP_apiKey": "@react_app_apikey",
+        "REACT_APP_AUTH_DOMAIN_authDomain": "@react_app_auth_domain_authdomain",
+        "REACT_APP_databaseURL": "@react_app_databaseurl",
+        "REACT_APP_projectId": "@react_app_projectid",
+        "EACT_APP_storageBucket": "@react_app_storagebucket",
+        "REACT_APP_messagingSenderId": "@react_app_messagingsenderid",
+        "REACT_APP_appId": "@react_app_appid",
+        "REACT_APP_measurementId": "@react_app_measurementid"
+      }
+    }
+  }

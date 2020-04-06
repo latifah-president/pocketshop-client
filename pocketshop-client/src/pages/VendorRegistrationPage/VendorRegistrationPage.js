@@ -1,21 +1,8 @@
-import React, { useEffect, useState } from "react";
-import Button from "@material-ui/core/Button";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField";
-
-import {
-  SignUpForm,
-  SignInForm
-} from "../../containers/RegistrationFormContainer/RegistrationFormContainer";
+import SignUpForm from "../../containers/RegistrationFormContainer/RegistrationFormContainer";
+import SignInForm from "../../containers/RegistrationFormContainer/LoginFormContainer";
 import { RegistrationFormOverlay } from "../../components/RegistrationFormOverlay/RegistrationFormOverlay";
-
-import history from "../../history";
-
 import "./styles.css";
 
 const useStyles = makeStyles(theme => ({
@@ -38,7 +25,6 @@ const useStyles = makeStyles(theme => ({
 const handleSubmit = () => {};
 
 export const VendorRegistrationPage = () => {
-  const classes = useStyles();
   return (
     <div className="registration-container" id="container">
       <SignUpForm handleSubmit={handleSubmit} />

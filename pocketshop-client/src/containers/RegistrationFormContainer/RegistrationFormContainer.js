@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { Switch, Route, withRouter } from "react-router-dom";
+import axios from "./../../axiosinstance";
+import {auth} from "./../../firebaseconfig";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
+import {MenuItem, Typography} from "@material-ui/core";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
@@ -39,6 +43,9 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "row",
     flexWrap: "wrap",
     maxWidth: "500px"
+  },
+  header: {
+    marginBottom: "2rem",
   }
 }));
 
@@ -104,46 +111,145 @@ const stateCodes = [
   "WY"
 ];
 
-export const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
-  const [state, setState] = useState("");
+const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
+  const [labelWidth, setLabelWidth] = useState(0);
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [street_address, setStreetAdd] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setStateInp] = useState("");
+  const [zip, setZip] = useState("");
+  const [country, setCountry] = useState("");
+  const [phone_number, setPhoneNumber] = useState("");
+  const [vendor_name, setVendorName] = useState("")
+
+  const inputLabel = React.useRef(null);
+  useEffect(() => {
+    setLabelWidth(inputLabel.current.offsetWidth);
+
+  }, [])
 
   const classes = useStyles();
 
-  const handleNameChange = () => {};
+  const initStripeConnection = () => {
+      axios.get(`/stripe/authorize/?business_type=individual&business_name=${first_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&state=${state}&zip=${zip}&country=US`)
+           .then(res => {
+             console.log("stripe auth data", res.data)
+            window.location.href = `https://pocket-shop.herokuapp.com/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&state=${state}&country=US`
+           })
+           .catch(err => {
+             console.log(err)
+           })
+  }
+
+
+  const signUpWithEmailAndPassword = () => {
+    if (!email || !password) return
+      auth
+        .createUserWithEmailAndPassword(email, password)
+        .then(({ user }) => {
+          if (user) {
+            const { uid } = user;
+            console.log("incoming user", user);
+            localStorage.setItem('firebase_id', uid);
+            if (user.email) {
+              const { email } = user;
+              console.log("emailuser", user);
+              const userObj = {
+                  firebase_id: uid,
+                  email,
+                  user_type: 'vendor',
+                  first_name,
+                  last_name,
+                  street_address,
+                  city,
+                  state,
+                  zip,
+                  country,
+                  phone_number,
+                  vendor_name
+                };
+              axios
+                .post("/vendor/register", { ...userObj })
+                .then(res => {
+                  console.log(res,'res from register')
+                  if (res.status === 201) {
+                    console.log("registration completed. User Aquired!")
+                    initStripeConnection()
+                  }
+                })
+                .catch(err => {
+                  console.log("Error: Vendor registration failed:",err);
+                });
+            }
+          }
+        })
+        .catch(err => {
+          console.log("Error Authenticating User:", err)
+          
+        });
+  };
 
   return (
-    <div className="form-container sign-up-container">
-      <h1 className="font-bold m-0">Create Account</h1>
-      <FormControl>
-        <div className={classes.root}>
+    <div className="form-container sign-up-container" >
+
+      <FormControl >
+
+      <form className={classes.root} >
+      <Typography variant="h4" className={classes.header} >Become A PocketShop Vendor</Typography>
+
           <TextField
             required
             className={classes.textFieldThin}
-            id="outlined-required"
+            id="first_name"
             label="First name"
-            // defaultValue="Hello World"
+            value={first_name}
             variant="outlined"
             margin="dense"
-            onChagne={handleNameChange}
+            onChange={e => setFirstName(e.target.value)}
           />
           <TextField
             required
             className={classes.textFieldThin}
-            id="outlined-required"
+            id="last_name"
             label="Last name"
             margin="dense"
-            // defaultValue="Hello World"
+            value={last_name}
             variant="outlined"
+            onChange={e => setLastName(e.target.value)}
           />
           <TextField
             required
             className={classes.textFieldWide}
-            id="outlined-required"
-            // fullWidth
+            id="email"
             label="Email"
             margin="dense"
-            // defaultValue="Hello World"
             variant="outlined"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+          <TextField
+            required
+            className={classes.textFieldWide}
+            id="password"
+            label="Password"
+            margin="dense"
+            variant="outlined"
+            value={password}
+            type="password"
+            onChange={e => setPassword(e.target.value)}
+          />
+           <TextField
+            required
+            className={classes.textFieldWide}
+            id="business_name"
+            label="Business Name"
+            margin="dense"
+            variant="outlined"
+            value={vendor_name}
+            onChange={e => setVendorName(e.target.value)}
           />
           <TextField
             required
@@ -151,8 +257,9 @@ export const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
             id="outlined-required"
             label="Street address"
             margin="dense"
-            // defaultValue="Hello World"
             variant="outlined"
+            value={street_address}
+            onChange={e => setStreetAdd(e.target.value)}
           />
           <TextField
             required
@@ -160,38 +267,40 @@ export const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
             id="outlined-required"
             label="City"
             margin="dense"
-            // defaultValue="Hello World"
             variant="outlined"
+            value={city}
+            onChange={e => setCity(e.target.value)}
           />
-          {/* <TextField
-          required
-          className={classes.textFieldThin}
-          id="outlined-required"
-          label="State"
-          margin="dense"
-          // defaultValue="Hello World"
-          variant="outlined"
-        /> */}
-          <InputLabel>State</InputLabel>
+          <FormControl variant="outlined" style={{marginTop: ".5rem"}}  required >
+          <InputLabel  ref={inputLabel} htmlFor="State" style={{marginLeft: ".5rem"}}>
+          State
+        </InputLabel>
           <Select
             className={classes.selectFieldThin}
             variant="outlined"
             margin="dense"
             value={state}
             label="State"
+            onChange={e => setStateInp(e.target.value)}
+            input={
+              <OutlinedInput name="State" labelWidth={labelWidth} id="State" />
+            }
           >
             {stateCodes.map(code => (
               <MenuItem value={code}>{code}</MenuItem>
             ))}
-          </Select>
+          </Select> 
+           </FormControl>
+
           <TextField
             required
             className={classes.textFieldThin}
             id="outlined-required"
             label="Zip"
             margin="dense"
-            // defaultValue="Hello World"
             variant="outlined"
+            value={zip}
+            onChange={e => setZip(e.target.value)}
           />
           <TextField
             required
@@ -199,8 +308,9 @@ export const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
             id="outlined-required"
             label="Country"
             margin="dense"
-            // defaultValue="Hello World"
             variant="outlined"
+            value={country}
+            onChange={e => setCountry(e.target.value)}
           />
           <TextField
             required
@@ -208,62 +318,20 @@ export const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
             id="outlined-required"
             label="Phone number"
             margin="dense"
-            // defaultValue="Hello World"
             variant="outlined"
+            value={phone_number}
+            onChange={e => setPhoneNumber(e.target.value)}
           />
-        </div>
+       </form>
+
       </FormControl>
-      {/* <button
-        className="rounded-xxl border border-light-blue bg-dark-blue text-white cursor-pointer text-xs font-bold py-3 px-12 tracking-wide uppercase ease-in duration-75"
-        onClick={e => {
-          e.preventDefault();
-          handleSubmit("sign-up__form");
-        }}
-      >
-        Sign Up
-      </button> */}
-      <Button variant="contained" color="primary">
+      <Button type="submit" variant="contained" color="primary" onClick={signUpWithEmailAndPassword}>
         Sign Up
       </Button>
     </div>
   );
 };
 
-export const SignInForm = ({ error, handleErrors, handleSubmit }) => {
-  const classes = useStyles();
-  return (
-    <div className="form-container sign-in-container">
-      <h1 className="font-bold m-0">Sign in</h1>
-      <TextField
-        required
-        className={classes.textField}
-        id="outlined-required"
-        label="Email"
-        margin="dense"
-        // defaultValue="Hello World"
-        variant="outlined"
-      />
-      <TextField
-        required
-        className={classes.textField}
-        id="outlined-required"
-        label="Password"
-        margin="dense"
-        // defaultValue="Hello World"
-        variant="outlined"
-      />
-      {/* <button
-        className="rounded-xxl border border-light-blue bg-dark-blue text-white cursor-pointer text-xs font-bold py-3 px-12 tracking-wide uppercase ease-in duration-75"
-        onClick={e => {
-          e.preventDefault();
-          handleSubmit("sign-in__form");
-        }}
-      >
-        Sign In
-      </button> */}
-      <Button variant="contained" color="primary">
-        Sign In
-      </Button>
-    </div>
-  );
-};
+export default SignUpForm
+
+

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
-
+import {AuthProvider} from "./context/authcontext";
 import { VendorRegistrationPage } from "./pages/VendorRegistrationPage/VendorRegistrationPage";
 import { CustomerRegistrationPage } from "./pages/CustomerRegistrationPage/CustomerRegistrationPage";
 import { HomePage } from "./pages/HomePage/HomePage";
@@ -19,6 +19,7 @@ function App() {
     <>
       <NavBar home={home} />
       <Switch>
+        <AuthProvider>
         <Route exact path="/">
           <HomePage />
         </Route>
@@ -31,6 +32,7 @@ function App() {
         <Route path="/cart">
           <ShoppingCartPage></ShoppingCartPage>
         </Route>
+        </AuthProvider>
       </Switch>
     </>
   );

@@ -1,6 +1,10 @@
 import React from "react";
-
+import { makeStyles } from "@material-ui/core/styles";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
 import { ProductCard } from "../../components/ProductCard/ProductCard";
+import Grid from '@material-ui/core/Grid';
+
 import "./styles.css";
 
 const products = [
@@ -41,12 +45,42 @@ const products = [
   }
 ];
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    // flexWrap: 'wrap',
+    justifyContent: 'center',
+    height: 850,
+    // overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+    flexGrow: 1,
+  },
+  gridList: {
+    alignItems: "center",
+    width: "90%",
+    // width: 500,
+  },
+  icon: {
+    color: 'rgba(255, 255, 255, 0.54)',
+  },
+  // gridListTile: {
+    
+  // }
+}));
+
 export const ProductsContainer = () => {
+
+  const classes = useStyles();
+
   return (
-    <div className="grid-cols-4">
+    <Grid container spacing={2} className={classes.root} >
+       <GridList cols={4} cellHeight={380} className={classes.gridList}>
       {products.map(product => (
-        <ProductCard product={product}></ProductCard>
+        <GridListTile  >
+          <ProductCard product={product}></ProductCard>
+        </GridListTile>
       ))}
-    </div>
+      </GridList>
+    </Grid>
   );
 };
