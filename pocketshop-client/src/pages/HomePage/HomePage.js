@@ -22,14 +22,15 @@ import { ProductCard } from "../../components/ProductCard/ProductCard";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { ProductsContainer } from "../../containers/ProductsContainer/ProductsContainer";
 import { CategoryDropdown } from "../../components/CategoryDropdown/CategoryDropdown";
+
 import {mainBtnColor} from "./../../global-styles/styles";
 
 import "./styles.css";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    height: "3ch"
+    height: "3ch",
   },
   selectEmpty: {
     marginTop: theme.spacing(2)
@@ -52,7 +53,7 @@ const HomePage = (props) => {
   const [stripeId, setStripeId] = useState("");
 
 
-  const handleCategoryChange = e => {
+  const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
   useEffect (() => {
@@ -89,26 +90,31 @@ const HomePage = (props) => {
   //   props.history.push("/");
   // }
   return (
-    <div>
-      <div className="business-info-bar">
-        <div className="business-logo"></div>
-      </div>
-      <div className="products-header">
-        <SearchBar></SearchBar>
-        <CategoryDropdown
-          category={category}
-          handleCategoryChange={handleCategoryChange}
-        ></CategoryDropdown>
-        <Button variant="contained" className={classes.btn} >
-          <ShoppingCartIcon className={classes.icon}></ShoppingCartIcon>
-          <Typography variant="button" display="block" className={classes.total} >
-          $0.00
-      </Typography>
-        </Button>
-        {/* <Button type="submit" variant="contained" color="primary" onClick={logout}
->
-        Log Out
-      </Button> */}
+    <div className="home-page">
+      {/* <BusinessBanner></BusinessBanner> */}
+      <div className="grid-cols-8 gap-4">
+        <div
+          style={{
+            gridColumn: "span 2 / span 2",
+            backgroundImage:
+              "url(https://scontent-dfw5-1.xx.fbcdn.net/v/t1.0-9/52692462_1018395905028239_7366818916456202240_n.jpg?_nc_cat=103&_nc_sid=85a577&_nc_ohc=pTMDztd9Ao0AX_X00OZ&_nc_ht=scontent-dfw5-1.xx&oh=9a8f3b15ad3301b36b863f70ff545ae7&oe=5EAE70C7)",
+            backgroundSize: "cover",
+            width: "200px",
+            height: "200px",
+            display: "inline-block",
+          }}
+        ></div>
+        {/* <div className="col-span-1"></div> */}
+        <div className="col-span-3">
+          <SearchBar></SearchBar>
+        </div>
+        <div className="col-span-3">
+          <CategoryDropdown
+            className="category-dropdown"
+            category={category}
+            handleCategoryChange={handleCategoryChange}
+          ></CategoryDropdown>
+        </div>
       </div>
       <ProductsContainer></ProductsContainer>
     </div>
