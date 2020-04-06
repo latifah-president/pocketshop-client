@@ -15,6 +15,7 @@ import { ProductCard } from "../../components/ProductCard/ProductCard";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { ProductsContainer } from "../../containers/ProductsContainer/ProductsContainer";
 import { CategoryDropdown } from "../../components/CategoryDropdown/CategoryDropdown";
+import { BusinessBanner } from "../../containers/BusinessBanner/BusinessBanner";
 
 import "./styles.css";
 
@@ -38,20 +39,25 @@ export const HomePage = () => {
   console.log(category);
 
   return (
-    <div>
-      <div className="business-info-bar">
-        <div className="business-logo"></div>
-      </div>
+    <div className="home-page">
+      {/* <BusinessBanner></BusinessBanner> */}
       <div className="products-header">
-        <SearchBar></SearchBar>
-        <CategoryDropdown
-          category={category}
-          handleCategoryChange={handleCategoryChange}
-        ></CategoryDropdown>
-        <Button variant="contained" color="primary">
-          <ShoppingCartIcon color="default"></ShoppingCartIcon>
-          <span> $0.00 </span>
-        </Button>
+        <div
+          style={{
+            backgroundImage:
+              "url(https://scontent-dfw5-1.xx.fbcdn.net/v/t1.0-9/52692462_1018395905028239_7366818916456202240_n.jpg?_nc_cat=103&_nc_sid=85a577&_nc_ohc=pTMDztd9Ao0AX_X00OZ&_nc_ht=scontent-dfw5-1.xx&oh=9a8f3b15ad3301b36b863f70ff545ae7&oe=5EAE70C7)",
+            backgroundSize: "cover",
+            width: "200px",
+            height: "200px"
+          }}
+        ></div>
+        <div className="filter-tools">
+          <SearchBar></SearchBar>
+          <CategoryDropdown
+            category={category}
+            handleCategoryChange={handleCategoryChange}
+          ></CategoryDropdown>
+        </div>
       </div>
       <ProductsContainer></ProductsContainer>
     </div>

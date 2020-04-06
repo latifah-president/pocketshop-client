@@ -1,4 +1,13 @@
+.home-page {
+  padding-top: 80px;
+}
+
 .products-header {
+  display: block;
+  height: 240px;
+  padding: 20px;
   margin: 30px 10vw 30px 10vw;
-  display: inline-flex;
+}
+
+.filter-tools {
 }
