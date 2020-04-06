@@ -19,21 +19,21 @@ import { BusinessBanner } from "../../containers/BusinessBanner/BusinessBanner";
 
 import "./styles.css";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    height: "3ch"
+    height: "3ch",
   },
   selectEmpty: {
-    marginTop: theme.spacing(2)
-  }
+    marginTop: theme.spacing(2),
+  },
 }));
 
 export const HomePage = () => {
   const classes = useStyles();
   const [category, setCategory] = useState("all");
 
-  const handleCategoryChange = e => {
+  const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
   console.log(category);
@@ -41,19 +41,25 @@ export const HomePage = () => {
   return (
     <div className="home-page">
       {/* <BusinessBanner></BusinessBanner> */}
-      <div className="products-header">
+      <div className="grid-cols-8 gap-4">
         <div
           style={{
+            gridColumn: "span 2 / span 2",
             backgroundImage:
               "url(https://scontent-dfw5-1.xx.fbcdn.net/v/t1.0-9/52692462_1018395905028239_7366818916456202240_n.jpg?_nc_cat=103&_nc_sid=85a577&_nc_ohc=pTMDztd9Ao0AX_X00OZ&_nc_ht=scontent-dfw5-1.xx&oh=9a8f3b15ad3301b36b863f70ff545ae7&oe=5EAE70C7)",
             backgroundSize: "cover",
             width: "200px",
-            height: "200px"
+            height: "200px",
+            display: "inline-block",
           }}
         ></div>
-        <div className="filter-tools">
+        {/* <div className="col-span-1"></div> */}
+        <div className="col-span-3">
           <SearchBar></SearchBar>
+        </div>
+        <div className="col-span-3">
           <CategoryDropdown
+            className="category-dropdown"
             category={category}
             handleCategoryChange={handleCategoryChange}
           ></CategoryDropdown>
