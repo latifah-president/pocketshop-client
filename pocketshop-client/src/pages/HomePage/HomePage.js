@@ -105,10 +105,10 @@ const HomePage = (props) => {
           $0.00
       </Typography>
         </Button>
-        <Button type="submit" variant="contained" color="primary" onClick={logout}
+        {/* <Button type="submit" variant="contained" color="primary" onClick={logout}
 >
         Log Out
-      </Button>
+      </Button> */}
       </div>
       <ProductsContainer></ProductsContainer>
     </div>
