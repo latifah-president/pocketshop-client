@@ -3,7 +3,7 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import {AuthProvider} from "./context/authcontext";
 import { VendorRegistrationPage } from "./pages/VendorRegistrationPage/VendorRegistrationPage";
 import { CustomerRegistrationPage } from "./pages/CustomerRegistrationPage/CustomerRegistrationPage";
-import {HomePage}  from "./pages/HomePage/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
 import "./App.css";
 
 function App() {
