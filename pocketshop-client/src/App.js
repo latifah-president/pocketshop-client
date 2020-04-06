@@ -4,7 +4,7 @@ import {AuthProvider} from "./context/authcontext";
 import { VendorRegistrationPage } from "./pages/VendorRegistrationPage/VendorRegistrationPage";
 import { CustomerRegistrationPage } from "./pages/CustomerRegistrationPage/CustomerRegistrationPage";
 
-import { HomePage } from "./pages/HomePage/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
 import { ShoppingCartPage } from "./pages/ShoppingCartPage/ShoppingCartPage";
 import { NavBar } from "./components/NavBar/NavBar";
 
