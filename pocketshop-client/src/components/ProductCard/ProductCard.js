@@ -16,7 +16,8 @@ import "./styles.css";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 270,
-    minWidth: 270,
+    // minWidth: 270,
+    margin: "0 auto",
     border: "1px solid #808080"
   },
   media: {

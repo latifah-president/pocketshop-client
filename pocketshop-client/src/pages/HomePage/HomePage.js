@@ -4,7 +4,6 @@ import { AuthContext } from './../../context/authcontext';
 
 import axios from "./../../axiosinstance";
 import queryString from "query-string";
-import {auth} from "./../../firebaseconfig";
 import { makeStyles } from "@material-ui/core/styles";
 
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
@@ -50,26 +49,32 @@ const useStyles = makeStyles((theme) => ({
 const HomePage = (props) => {
   const classes = useStyles();
   const [category, setCategory] = useState("all");
-  const [stripeId, setStripeId] = useState("");
+  const [stripeSuccess, setStripeSuccess] = useState(false);
 
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
-  useEffect (() => {
+
+  console.log(stripeSuccess)
+  const getStripeToken = () => {
     let params = queryString.parse(props.location.search)
     let stripeToken = params.code
     console.log('params with code:', params.code)
-      axios.get(`/stripe/token?code=${params['code']}`)
+      axios.post(`/stripe/token`, {stripeToken})
       .then(res => {
+        console.log("stripe res", res)
+
         if (res.status === 200) {
+          //TODO: CLEAN UP THE ERROR HANDLING ON FRONT AND BACK END
           console.log("Stipe Onboarding Completed!")
+          // setStripeSuccess(true)
           let firebase_id = localStorage.getItem("firebase_id")
           //TODO: REMOVE PUT REQUEST AND HANDLE UPDATING THE VENDOR'S STRIPE INFO ON FRONTEND
           axios.put(`/vendor/${firebase_id}`, {stripe_id: params.code})
           .then(res => {
             if (res.status === 200) {
-              console.log("The vendor's stripe id added!")
+              console.log("The vendor's stripe id has been added!")
             }
           })
           .catch (err => {
@@ -78,20 +83,25 @@ const HomePage = (props) => {
             // IF TRUE A POPUP SHOULD SHOW UP ASKING THE VENDOR TO SIGN IN AGAIN
             //ONCE CLICKED THE INIT STRIPE FUNCTION SHOULD BE LAUNCHED
           })
+        } else {
+          // setStripeSuccess(false)
+          console.log("fail")
         }
       })
       .catch(err => {
         console.log(err)
       })
-  }, [])
-  const logout = () => {
-    auth.signOut();
-    localStorage.clear();
-    props.history.push("/");
   }
+  useEffect (() => {
+    console.log("use effect stripe")
+      getStripeToken()
+      return () => {
+        console.log("unsubscribe ")
+      }
+  }, [stripeSuccess])
+
   return (
     <div className="home-page">
-      {/* <BusinessBanner></BusinessBanner> */}
       <div className="grid-cols-8 gap-4">
         <div
           style={{
@@ -104,7 +114,6 @@ const HomePage = (props) => {
             display: "inline-block",
           }}
         ></div>
-        {/* <div className="col-span-1"></div> */}
         <div className="col-span-3">
           <SearchBar></SearchBar>
         </div>

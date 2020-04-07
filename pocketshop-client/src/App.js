@@ -6,7 +6,7 @@ import { CustomerRegistrationPage } from "./pages/CustomerRegistrationPage/Custo
 
 import HomePage from "./pages/HomePage/HomePage";
 import { ShoppingCartPage } from "./pages/ShoppingCartPage/ShoppingCartPage";
-import { NavBar } from "./components/NavBar/NavBar";
+import NavBar  from "./components/NavBar/NavBar";
 
 import "./App.css";
 
@@ -20,10 +20,11 @@ function App() {
     <>
       <NavBar home={home} />
       <Switch>
-        <AuthProvider>
-        <Route exact path="/">
+      <Route exact path="/">
           <HomePage />
         </Route>
+        <AuthProvider>
+        
         <Route path="/registration/vendor">
           <VendorRegistrationPage />
         </Route>
@@ -34,6 +35,7 @@ function App() {
           <ShoppingCartPage></ShoppingCartPage>
         </Route>
         </AuthProvider>
+        
       </Switch>
     </>
   );

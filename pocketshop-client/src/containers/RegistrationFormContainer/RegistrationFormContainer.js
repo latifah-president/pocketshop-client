@@ -177,7 +177,7 @@ const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
                   if (res.status === 201) {
                     console.log("Registration completed. User Aquired!")
                     console.log("Stripe onboarding started")
-                    window.location.href = `https://pocket-shop.herokuapp.com/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&state=${state}&country=US`
+                    window.location.href = `http://localhost:8585/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&state=${state}&country=US`
                   }
                 })
                 .catch(err => {
@@ -254,7 +254,7 @@ const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
           <TextField
             required
             className={classes.textFieldWide}
-            id="outlined-required"
+            id="street_address"
             label="Street address"
             margin="dense"
             variant="outlined"
@@ -264,7 +264,7 @@ const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
           <TextField
             required
             className={classes.textFieldThin}
-            id="outlined-required"
+            id="city"
             label="City"
             margin="dense"
             variant="outlined"
@@ -279,6 +279,7 @@ const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
             className={classes.selectFieldThin}
             variant="outlined"
             margin="dense"
+            id="state"
             value={state}
             label="State"
             onChange={e => setStateInp(e.target.value)}
@@ -295,7 +296,7 @@ const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
           <TextField
             required
             className={classes.textFieldThin}
-            id="outlined-required"
+            id="zip"
             label="Zip"
             margin="dense"
             variant="outlined"
@@ -305,7 +306,7 @@ const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
           <TextField
             required
             className={classes.textFieldThin}
-            id="outlined-required"
+            id="country"
             label="Country"
             margin="dense"
             variant="outlined"
@@ -315,7 +316,7 @@ const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
           <TextField
             required
             className={classes.textFieldWide}
-            id="outlined-required"
+            id="phone_number"
             label="Phone number"
             margin="dense"
             variant="outlined"

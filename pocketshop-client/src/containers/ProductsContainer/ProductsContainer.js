@@ -31,6 +31,13 @@ const products = [
       "https://i.dailymail.co.uk/i/newpix/2018/03/08/11/49FF748700000578-5476901-image-a-27_1520507605152.jpg"
   },
   {
+    name: "bananas",
+    price: 3.0,
+    description: "fifth product",
+    imageUrl:
+      "https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-320-80.jpg"
+  },
+  {
     name: "strawberries",
     price: 4.0,
     description: "fourth product",
@@ -52,27 +59,38 @@ const useStyles = makeStyles((theme) => ({
     
     justifyContent: 'center',
     height: "auto",
-    // overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
     flexGrow: 1,
   },
   gridList: {
     alignItems: "center",
     width: "90%",
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
     // width: 500,
+    // [theme.breakpoints.down('md')]: {
+    //   width: "100%",
+    // }
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
   gridListTile: {
-    border: "1px solid orange"
+    margin: "1rem auto",
+    width: "10%",
+    justifyContent: "space-between",
+    maxWidth: 270,
+
   }
 }));
 
+// Material UI breakpoints
+// value         |0px     600px    960px    1280px   1920px
+// key           |xs      sm       md       lg       xl
+// screen width  |--------|--------|--------|--------|-------->
+// range         |   xs   |   sm   |   md   |   lg   |   xl
+
 const ProductsContainer = (props) => {
   const classes = useStyles();
-  
+console.log("width" ,props.width)
   const getGridListCols = () => {
     if (isWidthUp('xl', props.width)) {
       
@@ -87,13 +105,13 @@ const ProductsContainer = (props) => {
       return 3;
     }
     if (isWidthUp('sm', props.width)) {
-      return 1;
+      return 2;
     }
     return 1;
   }
   return (
-    <Grid container spacing={2} className={classes.root}  style={{border: "1px solid green"}}>
-       <GridList  cols={getGridListCols()} cellHeight={380} className={classes.gridList} style={{border: "1px solid red"}}>
+    <Grid container spacing={2} className={classes.root}>
+       <GridList  cols={getGridListCols()} cellHeight={380} className={classes.gridList}>
       {products.map(product => (
         <GridListTile  className={classes.gridListTile}>
           <ProductCard product={product}></ProductCard>

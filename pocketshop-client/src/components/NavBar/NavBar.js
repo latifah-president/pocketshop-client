@@ -1,12 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-
+import {auth} from "./../../firebaseconfig";
+import { withRouter } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 import "./styles.css";
 
-export const NavBar = () => {
+const NavBar = (props) => {
+  const logout = () => {
+    auth.signOut();
+    localStorage.clear();
+    props.history.push("/");
+  }
   return (
     <div>
       <nav>
@@ -20,8 +26,13 @@ export const NavBar = () => {
               <span> $0.00 </span>
             </Button>
           </Link>
+          <button onClick={logout}>
+            log out
+          </button>
         </ul>
       </nav>
     </div>
   );
 };
+
+export default withRouter(NavBar)
