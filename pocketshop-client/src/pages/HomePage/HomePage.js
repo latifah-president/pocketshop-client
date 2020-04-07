@@ -20,7 +20,7 @@ import { blue } from "@material-ui/core/colors";
 import { ProductCard } from "../../components/ProductCard/ProductCard";
 
 import { SearchBar } from "../../components/SearchBar/SearchBar";
-import { ProductsContainer } from "../../containers/ProductsContainer/ProductsContainer";
+import ProductsContainer  from "../../containers/ProductsContainer/ProductsContainer";
 import { CategoryDropdown } from "../../components/CategoryDropdown/CategoryDropdown";
 import {mainBtnColor} from "./../../global-styles/styles";
 
@@ -83,11 +83,11 @@ const HomePage = (props) => {
         console.log(err)
       })
   }, [])
-  // const logout = () => {
-  //   auth.signOut();
-  //   localStorage.clear();
-  //   props.history.push("/");
-  // }
+  const logout = () => {
+    auth.signOut();
+    localStorage.clear();
+    props.history.push("/");
+  }
   return (
     <div>
       <div className="business-info-bar">
@@ -105,10 +105,10 @@ const HomePage = (props) => {
           $0.00
       </Typography>
         </Button>
-        {/* <Button type="submit" variant="contained" color="primary" onClick={logout}
+        <Button type="submit" variant="contained" color="primary" onClick={logout}
 >
         Log Out
-      </Button> */}
+      </Button>
       </div>
       <ProductsContainer></ProductsContainer>
     </div>

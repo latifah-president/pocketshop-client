@@ -137,7 +137,7 @@ const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
       axios.get(`/stripe/authorize/?business_type=individual&business_name=${first_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&state=${state}&zip=${zip}&country=US`)
            .then(res => {
              console.log("stripe auth data", res.data)
-            window.location.href = `https://pocket-shop.herokuapp.com/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&state=${state}&country=US`
+            // window.location.href = `https://pocket-shop.herokuapp.com/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&state=${state}&country=US`
            })
            .catch(err => {
              console.log(err)
@@ -177,7 +177,9 @@ const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
                   console.log(res,'res from register')
                   if (res.status === 201) {
                     console.log("registration completed. User Aquired!")
-                    initStripeConnection()
+                    // initStripeConnection()
+                    window.location.href = `http://localhost:8585/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&state=${state}&country=US`
+
                   }
                 })
                 .catch(err => {

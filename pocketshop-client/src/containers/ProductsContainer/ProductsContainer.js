@@ -4,6 +4,7 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import { ProductCard } from "../../components/ProductCard/ProductCard";
 import Grid from '@material-ui/core/Grid';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 import "./styles.css";
 
@@ -48,9 +49,9 @@ const products = [
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    // flexWrap: 'wrap',
+    
     justifyContent: 'center',
-    height: 850,
+    height: "auto",
     // overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
     flexGrow: 1,
@@ -58,25 +59,43 @@ const useStyles = makeStyles((theme) => ({
   gridList: {
     alignItems: "center",
     width: "90%",
+    flexWrap: 'wrap',
     // width: 500,
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
-  // gridListTile: {
-    
-  // }
+  gridListTile: {
+    border: "1px solid orange"
+  }
 }));
 
-export const ProductsContainer = () => {
-
+const ProductsContainer = (props) => {
   const classes = useStyles();
+  
+  const getGridListCols = () => {
+    if (isWidthUp('xl', props.width)) {
+      
+      return 5;
+    }
 
+    if (isWidthUp('lg', props.width)) {
+      return 4;
+    }
+
+    if (isWidthUp('md', props.width)) {
+      return 3;
+    }
+    if (isWidthUp('sm', props.width)) {
+      return 1;
+    }
+    return 1;
+  }
   return (
-    <Grid container spacing={2} className={classes.root} >
-       <GridList cols={4} cellHeight={380} className={classes.gridList}>
+    <Grid container spacing={2} className={classes.root}  style={{border: "1px solid green"}}>
+       <GridList  cols={getGridListCols()} cellHeight={380} className={classes.gridList} style={{border: "1px solid red"}}>
       {products.map(product => (
-        <GridListTile  >
+        <GridListTile  className={classes.gridListTile}>
           <ProductCard product={product}></ProductCard>
         </GridListTile>
       ))}
@@ -84,3 +103,5 @@ export const ProductsContainer = () => {
     </Grid>
   );
 };
+
+export default withWidth()(ProductsContainer)
