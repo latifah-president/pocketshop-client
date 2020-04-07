@@ -144,7 +144,6 @@ const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
            })
   }
 
-
   const signUpWithEmailAndPassword = () => {
     if (!email || !password) return
       auth
@@ -176,10 +175,9 @@ const SignUpForm = ({ error, handleErrors, handleSubmit }) => {
                 .then(res => {
                   console.log(res,'res from register')
                   if (res.status === 201) {
-                    console.log("registration completed. User Aquired!")
-                    // initStripeConnection()
-                    window.location.href = `http://localhost:8585/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&state=${state}&country=US`
-
+                    console.log("Registration completed. User Aquired!")
+                    console.log("Stripe onboarding started")
+                    window.location.href = `https://pocket-shop.herokuapp.com/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&state=${state}&country=US`
                   }
                 })
                 .catch(err => {

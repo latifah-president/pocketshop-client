@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
           if(user) {
               return firebase.auth().currentUser.getIdToken()
               .then(idToken => {
-                  console.log(idToken, 'idtoken')
+                  //TODO: SET AUTH HEADERS ON AXIOS INSTANCE AND REMOVE TOKEN FROM LOCAL STORAGE
                   localStorage.setItem('token', idToken, )
                   setCurrentUser(user)
                   setIsLoggedIn(true)
