@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
     boxSizing: "border-box",
     // maxWidth: "100vw",
     padding: "4vw",
+    margin: "0",
     // border: "black 2px solid",
   },
   containerTitle: {
@@ -93,14 +94,40 @@ const useStyles = makeStyles((theme) => ({
     // border: "cyan 2px solid",
     height: "24rem",
   },
-  checkoutDetail: {
-    // border: "red 2px solid",
+  //   cartSummaryTableHeadContainer: {
+  //     padding: "0",
+  //     paddingLeft: "36px",
+  //     paddingRight: "36px",
+  //   },
+  cartSummaryTableHeadProduct: {
+    // alignItems: "center",
+    // justifyContent: "center",
+    textAlign: "left",
+    paddingLeft: "24px",
+    paddingRight: "24px",
   },
-  checkoutDetailName: {
-    // border: "green 2px solid",
+  cartSummaryTableHeadQuantity: {
+    // alignItems: "center",
+    // justifyContent: "center",
+    textAlign: "center",
+    paddingLeft: "24px",
+    paddingRight: "24px",
   },
-  checkoutDetailValue: {
-    // border: "yellow 2px solid",
+  cartSummaryTableHeadPrice: {
+    // alignItems: "center",
+    // justifyContent: "center",
+    textAlign: "right",
+    paddingLeft: "24px",
+    paddingRight: "24px",
+  },
+  cartSummaryTitle: {
+    border: "grey 1px solid",
+    backgroundColor: "#DCDCDC",
+  },
+  cartItemCardContainer: {
+    boxSizing: "border-box",
+    padding: "0px",
+    // display: "flex",
   },
 }));
 
@@ -141,10 +168,30 @@ export const ShoppingCartContainer = () => {
       spacing={8}
     >
       <Grid container item xs={8} spacing={3}>
-        <Typography variant="h4" gutterBottom>
-          Shopping Cart Summary
-        </Typography>
-        <Grid item xs={12}>
+        <Grid item className={classes.cartSummaryTitle} xs={12}>
+          <Typography variant="h4" gutterBottom>
+            Shopping Cart Review
+          </Typography>
+        </Grid>
+
+        <Grid container className={classes.cartSummaryTableHeadContainer} item>
+          <Grid item className={classes.cartSummaryTableHeadProduct} xs={6}>
+            <Typography variant="h6" gutterBottom>
+              Product
+            </Typography>
+          </Grid>
+          <Grid item className={classes.cartSummaryTableHeadQuantity} xs={3}>
+            <Typography variant="h6" gutterBottom>
+              Quantity
+            </Typography>
+          </Grid>
+          <Grid item className={classes.cartSummaryTableHeadPrice} xs={3}>
+            <Typography variant="h6" gutterBottom>
+              Price
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid className={classes.cartItemCardContainer} item xs={12}>
           {cartItems.map((item) => (
             <CartItemCard item={item}></CartItemCard>
           ))}
