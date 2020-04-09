@@ -11,13 +11,19 @@ const useStyles = makeStyles((theme) => ({
     borderTop: "grey 1px dotted",
     width: "100%",
   },
+  card: {
+    margin: "0",
+  },
   paper: {
     padding: theme.spacing(2),
-    margin: "auto",
+    // width: "100%",
+    // display: "flex",
+    // margin: "0",
+    // margin: "auto",
     // maxWidth: 500,
   },
   image: {
-    width: "20vw",
+    width: "100%",
     // height: 128,
   },
   img: {
@@ -29,6 +35,12 @@ const useStyles = makeStyles((theme) => ({
   cartItemCard: {
     width: "100%",
   },
+  quantity: {
+    textAlign: "center",
+  },
+  price: {
+    textAlign: "right",
+  },
 }));
 
 export const CartItemCard = ({ item }) => {
@@ -39,11 +51,11 @@ export const CartItemCard = ({ item }) => {
     setExpanded(!expanded);
   };
   return (
-    <Grid container spacing={3}>
+    <Grid container className={classes.card} xs={12} spacing={3}>
       <div className={classes.root}>
         <Paper className={classes.paper}>
           <Grid container spacing={2}>
-            <Grid item>
+            <Grid item xs={3}>
               <ButtonBase className={classes.image}>
                 <img
                   className={classes.img}
@@ -52,8 +64,8 @@ export const CartItemCard = ({ item }) => {
                 />
               </ButtonBase>
             </Grid>
-            <Grid item xs={12} sm container>
-              <Grid item xs container direction="column" spacing={2}>
+            <Grid item xs={9} sm container>
+              <Grid item xs={4} container direction="column" spacing={2}>
                 <Grid item xs>
                   <Typography gutterBottom variant="subtitle1">
                     {item.name}
@@ -78,7 +90,10 @@ export const CartItemCard = ({ item }) => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item>
+              <Grid item className={classes.quantity} xs={4}>
+                Quantity
+              </Grid>
+              <Grid item className={classes.price} xs={4}>
                 <Typography variant="subtitle1">{`$${item.price}`}</Typography>
               </Grid>
             </Grid>
