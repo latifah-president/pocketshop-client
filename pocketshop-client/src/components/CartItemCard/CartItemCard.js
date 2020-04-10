@@ -4,6 +4,11 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,17 +40,26 @@ const useStyles = makeStyles((theme) => ({
   cartItemCard: {
     width: "100%",
   },
+  quantityDropdown: {
+    // height: "2.5rem",
+    // width: "4rem",
+    // paddingRight: "24px",
+  },
   quantity: {
     textAlign: "center",
   },
   price: {
     textAlign: "right",
   },
+  priceTypography: {
+    fontWeight: "bold",
+  },
 }));
 
 export const CartItemCard = ({ item }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [quantity, setQuantity] = React.useState(1);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -91,10 +105,45 @@ export const CartItemCard = ({ item }) => {
                 </Grid>
               </Grid>
               <Grid item className={classes.quantity} xs={4}>
-                Quantity
+                {/* <FormControl variant="filled" className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-filled-label">
+                    Quantity
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-filled-label"
+                    id="demo-simple-select-filled"
+                    className={classes.quantityDropdown}
+                    value={quantity}
+                    onChange={(e) => {
+                      setQuantity(e.target.value);
+                    }}
+                  >
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <MenuItem value={i}>{i}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl> */}
+                <FormControl className={classes.formControl}>
+                  <Select
+                    className={classes.quantityDropdown}
+                    value={quantity}
+                    onChange={(e) => {
+                      setQuantity(e.target.value);
+                    }}
+                    displayEmpty
+                    inputProps={{ "aria-label": "Without label" }}
+                  >
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <MenuItem value={i}>{i}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item className={classes.price} xs={4}>
-                <Typography variant="subtitle1">{`$${item.price}`}</Typography>
+                <Typography
+                  className={classes.priceTypography}
+                  variant="subtitle1"
+                >{`$${item.price.toFixed(2)}`}</Typography>
               </Grid>
             </Grid>
           </Grid>

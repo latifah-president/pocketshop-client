@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 import { CartItemCard } from "../../components/CartItemCard/CartItemCard";
 
@@ -67,8 +68,10 @@ const useStyles = makeStyles((theme) => ({
     margin: "0",
     // border: "black 2px solid",
   },
-  containerTitle: {
+  orderSummaryContainerTitle: {
     maxHeight: "40px",
+    padding: "2rem",
+    fontWeight: "bold",
   },
   //   paper: {
   //     padding: theme.spacing(1),
@@ -84,50 +87,81 @@ const useStyles = makeStyles((theme) => ({
     height: "1.5rem",
   },
   orderSummaryContainer: {
-    // border: "blue 2px solid",
+    borderTop: "#C0C0C0 1px solid",
     display: "flex",
+    // boxSizing: "border-box",
     flexDirection: "column",
+    padding: "0",
+    margin: "0",
     // justify: "center",
   },
-  checkoutDetails: {
+  orderSummaryDetails: {
     marginTop: "4rem",
     // border: "cyan 2px solid",
     height: "24rem",
+    // padding: "2rem",
   },
-  //   cartSummaryTableHeadContainer: {
+  orderSummaryDetail: {
+    height: "12px",
+    padding: "2rem",
+  },
+  orderSummaryName: {
+    fontWeight: "bold",
+    textAlign: "left",
+  },
+  orderSummaryValue: {
+    fontWeight: "bold",
+    textAlign: "right",
+  },
+  //   cartReviewTableHeadContainer: {
   //     padding: "0",
   //     paddingLeft: "36px",
   //     paddingRight: "36px",
   //   },
-  cartSummaryTableHeadProduct: {
+  cartReviewContainer: {
+    // borderTop: "1px #C0C0C0 solid",
+    borderRight: "1px #C0C0C0 solid",
+    padding: "0",
+    margin: "0",
+  },
+  cartReviewTableHeadProduct: {
     // alignItems: "center",
     // justifyContent: "center",
     textAlign: "left",
     paddingLeft: "24px",
     paddingRight: "24px",
   },
-  cartSummaryTableHeadQuantity: {
+  cartReviewTableHeadQuantity: {
     // alignItems: "center",
     // justifyContent: "center",
     textAlign: "center",
     paddingLeft: "24px",
     paddingRight: "24px",
   },
-  cartSummaryTableHeadPrice: {
+  cartReviewTableHeadPrice: {
     // alignItems: "center",
     // justifyContent: "center",
     textAlign: "right",
     paddingLeft: "24px",
     paddingRight: "24px",
   },
-  cartSummaryTitle: {
-    border: "grey 1px solid",
+  cartReviewTitle: {
+    border: "#C0C0C0 1px solid",
     backgroundColor: "#DCDCDC",
+    borderSizing: "border-box",
   },
   cartItemCardContainer: {
     boxSizing: "border-box",
     padding: "0px",
     // display: "flex",
+  },
+  cartReviewTableHeadTypography: {
+    fontWeight: "bold",
+  },
+  button: {
+    width: "20rem",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 }));
 
@@ -147,17 +181,17 @@ const calculateTotal = () => {
     { name: "Sales Tax", value: tax },
     { name: "Total", value: checkoutTotal },
   ];
-  //   setCheckoutDetails(checkout);
+  //   setorderSummaryDetails(checkout);
   console.log(checkout);
   return checkout;
 };
 
 export const ShoppingCartContainer = () => {
   const classes = useStyles();
-  const [checkoutDetails, setCheckoutDetails] = useState([]);
+  const [orderSummaryDetails, setorderSummaryDetails] = useState([]);
 
   useEffect(() => {
-    setCheckoutDetails(calculateTotal());
+    setorderSummaryDetails(calculateTotal());
   }, []);
 
   return (
@@ -165,28 +199,46 @@ export const ShoppingCartContainer = () => {
       className={classes.cartContainer}
       container
       justify="center"
-      spacing={8}
+      //   spacing={8}
     >
-      <Grid container item xs={8} spacing={3}>
-        <Grid item className={classes.cartSummaryTitle} xs={12}>
+      <Grid
+        container
+        item
+        className={classes.cartReviewContainer}
+        xs={8}
+        spacing={3}
+      >
+        <Grid item className={classes.cartReviewTitle} xs={12}>
           <Typography variant="h4" gutterBottom>
             Shopping Cart Review
           </Typography>
         </Grid>
 
-        <Grid container className={classes.cartSummaryTableHeadContainer} item>
-          <Grid item className={classes.cartSummaryTableHeadProduct} xs={6}>
-            <Typography variant="h6" gutterBottom>
+        <Grid container className={classes.cartReviewTableHeadContainer} item>
+          <Grid item className={classes.cartReviewTableHeadProduct} xs={6}>
+            <Typography
+              className={classes.cartReviewTableHeadTypography}
+              variant="h6"
+              gutterBottom
+            >
               Product
             </Typography>
           </Grid>
-          <Grid item className={classes.cartSummaryTableHeadQuantity} xs={3}>
-            <Typography variant="h6" gutterBottom>
+          <Grid item className={classes.cartReviewTableHeadQuantity} xs={3}>
+            <Typography
+              className={classes.cartReviewTableHeadTypography}
+              variant="h6"
+              gutterBottom
+            >
               Quantity
             </Typography>
           </Grid>
-          <Grid item className={classes.cartSummaryTableHeadPrice} xs={3}>
-            <Typography variant="h6" gutterBottom>
+          <Grid item className={classes.cartReviewTableHeadPrice} xs={3}>
+            <Typography
+              className={classes.cartReviewTableHeadTypography}
+              variant="h6"
+              gutterBottom
+            >
               Price
             </Typography>
           </Grid>
@@ -208,25 +260,32 @@ export const ShoppingCartContainer = () => {
         // spacing={3}
         spacing={3}
       >
-        <Typography className={classes.containerTitle} variant="h4">
+        <Typography className={classes.orderSummaryContainerTitle} variant="h4">
           Order Summary
         </Typography>
-        <Grid item container className={classes.checkoutDetails}>
-          {checkoutDetails.map((item) => (
+        <Grid item container className={classes.orderSummaryDetails}>
+          {orderSummaryDetails.map((item) => (
             <Grid
               container
-              className={classes.checkoutDetail}
-              style={{ height: "12px", padding: "0" }}
+              className={classes.orderSummaryDetail}
+              //   style={{ height: "12px", padding: "100px" }}
             >
-              <Grid item className={classes.checkoutDetailName} xs={7}>
-                <Typography>{item.name}</Typography>
+              <Grid item xs={7}>
+                <Typography className={classes.orderSummaryName}>
+                  {item.name}
+                </Typography>
               </Grid>
-              <Grid item className={classes.checkoutDetailValue} xs={5}>
-                <Typography>{`$${item.value}`}</Typography>
+              <Grid item xs={5}>
+                <Typography
+                  className={classes.orderSummaryValue}
+                >{`$${item.value.toFixed(2)}`}</Typography>
               </Grid>
             </Grid>
           ))}
         </Grid>
+        <Button className={classes.button} variant="contained" color="primary">
+          Check out
+        </Button>
       </Grid>
     </Grid>
   );
