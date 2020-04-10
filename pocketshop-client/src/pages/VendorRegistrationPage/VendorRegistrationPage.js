@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import SignUpForm from "../../containers/RegistrationFormContainer/RegistrationFormContainer";
-import SignInForm from "../../containers/RegistrationFormContainer/LoginFormContainer";
+import SignUpForm from "../../containers/FormsContainer/RegistrationFormContainer";
+import SignInForm from "../../containers/FormsContainer/LoginFormContainer";
 import { RegistrationFormOverlay } from "../../components/RegistrationFormOverlay/RegistrationFormOverlay";
 import "./styles.css";
 

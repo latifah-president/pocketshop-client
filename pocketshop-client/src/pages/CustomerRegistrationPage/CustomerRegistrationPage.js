@@ -7,8 +7,8 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
-import SignUpForm from "./../../containers/RegistrationFormContainer/RegistrationFormContainer";
-import SignInForm from "./../../containers/RegistrationFormContainer/LoginFormContainer";
+import SignUpForm from "../../containers/FormsContainer/RegistrationFormContainer";
+import SignInForm from "../../containers/FormsContainer/LoginFormContainer";
 import { RegistrationFormOverlay } from "../../components/RegistrationFormOverlay/RegistrationFormOverlay";
 
 import history from "../../history";

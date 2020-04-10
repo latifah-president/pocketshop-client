@@ -5,13 +5,31 @@ import history from "./history";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { createStore, applyMiddleware, compose} from 'redux';
+import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+import RootReducer from './../src/strore/reducers/index';
 
-ReactDOM.render(
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(RootReducer, composeEnhancers(applyMiddleware(thunk, logger)));
+
+const app = (
   <React.StrictMode>
-    <Router history={history}>
-      <App />
-    </Router>
-  </React.StrictMode>,
+    <Provider store={store}>
+        <Router history={history}>
+            <App />
+        </Router>
+    </Provider>
+  </React.StrictMode>
+    
+)
+ReactDOM.render(
+  // <React.StrictMode>
+    app
+  
+  ,
   document.getElementById("root")
 );
 

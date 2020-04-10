@@ -94,7 +94,7 @@ const HomePage = (props) => {
   }
   useEffect (() => {
     console.log("use effect stripe")
-      getStripeToken()
+      // getStripeToken()
       return () => {
         console.log("unsubscribe ")
       }
