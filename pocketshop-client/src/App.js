@@ -23,6 +23,7 @@ function App(props) {
   const authenticated = useSelector(state => state.user.firebase_id)
   const dispatch = useDispatch();
 console.log(authenticated, "user")
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
         if(user) {

@@ -15,6 +15,9 @@ const initialState = {
         zip: null,
         country: null,
         phone_number: null,
+        availableBalance: 0,
+        pendingBalance: 0,
+        payout: 0,
     // },
     onboarded: false,
     stripeConnected: false,
@@ -165,6 +168,25 @@ export default (state = initialState, actions) => {
                                     error: actions.payload,
                                     // vendor_name: null
                                 }
+                            case vendorTypes.PAYOUT_START:
+                                return {
+                                    ...state,
+                                    loading: true
+                                }
+                            case vendorTypes.PAYOUT_SUCCESS:
+                                return {
+                                    ...state,
+                                    availableBalance: actions.payload.available,
+                                    pendingBalance: actions.payload.pending,
+                                    payout: actions.payload.payout,
+                                    loading: false
+                                }
+                             case vendorTypes.PAYOUT_FAIL:
+                                 return {
+                                     ...state,
+                                     error: actions.payload,
+                                     loading: false
+                                 }
 
             default:
             return state;

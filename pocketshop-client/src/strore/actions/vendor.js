@@ -130,9 +130,31 @@ export const updateVendor = (firebase_id, changes) => dispatch => {
         })
     })
 }
+
+export const getPayout = (stripe_id) => dispatch => {
+    dispatch({
+        type: vendorTypes.PAYOUT_START,
+    })
+    axios.post(`/stripe/payout`, {stripe_id})
+    .then(res => {
+        console.log(res.data, "payout")
+       dispatch({
+           type: vendorTypes.PAYOUT_SUCCESS,
+           payload: res.data
+       })
+    })
+    .catch(err => {
+        console.log("error from payputs", err)
+        dispatch({
+            type: vendorTypes.PAYOUT_FAIL,
+            payload: err
+        })
+    })
+}
 export default {
     getVendor,
     VendorRegistration,
     getStripeToken,
     updateVendor,
+    getPayout
 }
