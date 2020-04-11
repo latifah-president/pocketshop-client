@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { withRouter } from "react-router-dom";
-import { AuthContext } from './../../context/authcontext';
+import { AuthContext } from "./../../context/authcontext";
 
 import axios from "./../../axiosinstance";
 import queryString from "query-string";
@@ -13,18 +13,19 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Typography from '@material-ui/core/Typography';
+import Typography from "@material-ui/core/Typography";
 
 import { blue } from "@material-ui/core/colors";
 
-import { ProductCard } from "../../components/ProductCard/ProductCard";
+import ProductsContainer from "../../containers/ProductsContainer/ProductsContainer";
+import { LogoSearchToolsContainer } from "../../containers/LogoSearchToolsContainer/LogoSearchToolsContainer";
 
 import { SearchBar } from "../../components/SearchBar/SearchBar";
-import ProductsContainer  from "../../containers/ProductsContainer/ProductsContainer";
 import { CategoryDropdown } from "../../components/CategoryDropdown/CategoryDropdown";
 
 import {mainBtnColor} from "./../../global-styles/styles";
 import {getStripeToken, updateVendor} from "./../../strore/actions/vendor"
+
 import "./styles.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,10 +34,10 @@ const useStyles = makeStyles((theme) => ({
     height: "3ch",
   },
   selectEmpty: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   btn: {
-    backgroundColor: `${mainBtnColor}`
+    backgroundColor: `${mainBtnColor}`,
   },
   icon: {
     color: "white",
@@ -44,14 +45,15 @@ const useStyles = makeStyles((theme) => ({
   total: {
     marginLeft: ".5rem",
     color: "white",
-  }
+  },
 }));
 
 const HomePage = (props) => {
   const classes = useStyles();
   const [category, setCategory] = useState("all");
   const dispatch = useDispatch();
-
+  const [cartItems, setCartItems] = useState([]);
+  const [stripeSuccess, setStripeSuccess] = useState(false);
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -102,7 +104,7 @@ const HomePage = (props) => {
           // })
         } else {
           // setStripeSuccess(false)
-          console.log("fail")
+          console.log("fail");
         }
       })
       .catch(err => {
@@ -124,30 +126,14 @@ const HomePage = (props) => {
 
   return (
     <div className="home-page">
-      <div className="grid-cols-8 gap-4">
-        <div
-          style={{
-            gridColumn: "span 2 / span 2",
-            backgroundImage:
-              "url(https://scontent-dfw5-1.xx.fbcdn.net/v/t1.0-9/52692462_1018395905028239_7366818916456202240_n.jpg?_nc_cat=103&_nc_sid=85a577&_nc_ohc=pTMDztd9Ao0AX_X00OZ&_nc_ht=scontent-dfw5-1.xx&oh=9a8f3b15ad3301b36b863f70ff545ae7&oe=5EAE70C7)",
-            backgroundSize: "cover",
-            width: "200px",
-            height: "200px",
-            display: "inline-block",
-          }}
-        ></div>
-        <div className="col-span-3">
-          <SearchBar></SearchBar>
-        </div>
-        <div className="col-span-3">
-          <CategoryDropdown
-            className="category-dropdown"
-            category={category}
-            handleCategoryChange={handleCategoryChange}
-          ></CategoryDropdown>
-        </div>
-      </div>
-      <ProductsContainer></ProductsContainer>
+      <LogoSearchToolsContainer
+        category={category}
+        handleCategoryChange={handleCategoryChange}
+      ></LogoSearchToolsContainer>
+      <ProductsContainer
+        cartItems={cartItems}
+        setCartItems={setCartItems}
+      ></ProductsContainer>
     </div>
   );
 };

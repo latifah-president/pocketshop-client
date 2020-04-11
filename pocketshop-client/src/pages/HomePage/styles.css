@@ -25,32 +25,3 @@
 .category-dropdown {
   display: inline-block;
 }
-
-.grid-cols-8 {
-  display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  position: relative;
-  margin: 30px 10vw 30px 10vw;
-}
-
-.grid-item {
-  margin: 10px;
-}
-
-.col-span-1 {
-  grid-column: span 1 / span 1;
-  margin: auto;
-}
-.col-span-2 {
-  grid-column: span 2 / span 2;
-  margin: auto;
-}
-
-.col-span-3 {
-  grid-column: span 3 / span 3;
-  margin: auto;
-}
-
-.gap-4 {
-  gap: 1rem;
-}

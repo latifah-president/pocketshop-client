@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import {auth} from "./../../firebaseconfig";
-import { withRouter } from "react-router-dom";
+import { auth } from "./../../firebaseconfig";
+import {useDispatch, useSelector} from "react-redux"
+import { withRouter, NavLink } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -35,6 +36,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 const NavBar = (props) => {
   const classes = useStyles();
+  const user_type = useSelector(state => state.user.user_type);
+  const firebase_id = useSelector(state => state.user.firebase_id);
 
   const logout = () => {
     auth.signOut();
@@ -56,17 +59,19 @@ const NavBar = (props) => {
           </button>
           <IconButton
               edge="start"
-              aria-label="account of current user"
+              aria-label="profile"
               // aria-controls={menuId}
               // aria-haspopup="true"
               // onClick={handleProfileMenuOpen}
               // color="inherit"
             >
-              <AccountCircle  className={classes.icon}/>
+              <NavLink to={user_type === "vendor" ? `/vendor/${firebase_id}` : `/customer/${firebase_id}`}>
+                <AccountCircle  className={classes.icon}/>
+              </NavLink>
             </IconButton>
             <IconButton
               edge="start"
-              aria-label="account of current user"
+              aria-label="user settings"
               // aria-controls={menuId}
               // aria-haspopup="true"
               // onClick={handleProfileMenuOpen}
@@ -101,4 +106,4 @@ const NavBar = (props) => {
   
 };
 
-export default withRouter(NavBar)
+export default withRouter(NavBar);
