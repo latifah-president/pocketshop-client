@@ -12,7 +12,7 @@ export const init0auth = (email, uid, idToken) => dispatch => {
             if (res.data.user_type === "vendor") {
                 axios.get(`/vendor/${uid}`)
                 .then(res => {
-                    console.log("res ", res.data)
+                    console.log("vendor res data", res.data)
                     // console.log("res spread ", ...res.data)
                     dispatch({
                         type: authTypes.AUTH_SUCCESS,

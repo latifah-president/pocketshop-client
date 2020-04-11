@@ -138,6 +138,7 @@ const SignUpForm = (props) => {
             console.log("incoming user", user);
             if (user.email) {
               const { email, uid } = user;
+              localStorage.setItem("firebase_id", uid)
               console.log("emailuser", user);
               const userObj = {
                   firebase_id: uid,
@@ -146,7 +147,10 @@ const SignUpForm = (props) => {
                 };
                 console.log("userObj", userObj)
                 dispatch(register(userObj))
-                props.history.push(`/vendor/onboarding`)
+               
+                  props.history.push(`/vendor/onboarding`)
+
+              
             }
           }
         })

@@ -11,7 +11,10 @@ import HomePage from "./pages/HomePage/HomePage";
 import { ShoppingCartPage } from "./pages/ShoppingCartPage/ShoppingCartPage";
 import NavBar  from "./components/NavBar/NavBar";
 import "./App.css";
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from "@material-ui/core/styles";
 import { init0auth } from "./strore/actions/user";
+
 
 function App(props) {
   const [home, setHome] = useState(true);
@@ -40,19 +43,18 @@ console.log(authenticated, "user")
     return () => {
       console.log("unsubscribe ")
     }
-  }, [isLoggedIn]);
+  }, []);
 
  
 
   return (
     <div>
       <NavBar home={home} />
+   
       <Switch>
       <Route exact path="/">
           <HomePage />
-        </Route>
-        {/* <AuthProvider> */}
-        
+        </Route>        
         <Route exact path="/registration/vendor">
           <VendorRegistrationPage />
         </Route>
@@ -65,14 +67,9 @@ console.log(authenticated, "user")
         <Route exact path="/vendor/onboarding" component={StripeOnboarding}/>
         <Route exact path="/vendor/:id" component={VendorProfile}/>
           {/* <StripeOnboarding/>
-        </Route> */}
-        {/* <Route  exact path="/vendor/:id">
-          <VendorProfile/>
-        </Route> */}
-        
-        {/* </AuthProvider> */}
-        
+        </Route> */}        
       </Switch>
+    
     </div>
   );
 }

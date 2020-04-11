@@ -1,5 +1,6 @@
 import React, {useState, useRef} from 'react';
 import { withRouter } from "react-router-dom";
+import axios from "./../../axiosinstance";
 import {useDispatch, useSelector} from "react-redux"
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from '@material-ui/core/Grid';
@@ -12,6 +13,9 @@ import InputLabel from "@material-ui/core/InputLabel";
 import {MenuItem} from "@material-ui/core";
 import {mainBtnColor} from "./../../global-styles/styles"
 import { VendorRegistration } from '../../strore/actions/vendor';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 const stateCodes = [
     "AL",
@@ -133,7 +137,18 @@ const useStyles = makeStyles((theme) => ({
     stateInp: {
         marginLeft: theme.spacing(2),
 
-    }
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      paper: {
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+      },
   }));
 
 const OnboardingForm = (props) => {
@@ -147,12 +162,14 @@ const OnboardingForm = (props) => {
     const [state, setStateInp] = useState("");
     const [zip, setZip] = useState("");
     const [phone_number, setPhoneNumber] = useState("");
+    const [open, setOpen] = useState(false);
     const email = useSelector(state => state.user.email);
     const user_type = useSelector(state => state.user.user_type);
     const firebase_id = useSelector(state => state.user.firebase_id);
 
     console.log(firebase_id, "firebase onboarding")
     const inputLabel =useRef(null);
+
     const initStripe = (e) => {
         e.preventDefault()
         const userObj = {
@@ -169,9 +186,23 @@ const OnboardingForm = (props) => {
             country: "US",
             phone_number: phone_number
         }
+        // handleOpen()
         dispatch(VendorRegistration(userObj))
-        window.location.href = `http://localhost:8585/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&zip=${zip}&state=${state}&country=US`
+        window.location.replace(`http://localhost:8585/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&zip=${zip}&state=${state}&country=US`)
+
     }
+
+    // const redirectToStripe = () => {
+    //     window.location.href = `http://localhost:8585/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&zip=${zip}&state=${state}&country=US`
+    
+    //     }
+    const handleOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+      };
     return (
         <Grid container className={classes.root}>
             <Typography className={classes.header} variant="h4">Complete your profile</Typography>
@@ -205,7 +236,7 @@ const OnboardingForm = (props) => {
                     <TextField className={classes.textField}  fullWidth required id="Zip_Code" label="Zip Code" variant="outlined" onChange={e => setZip(e.target.value)}/>
                     <TextField className={classes.textField}  fullWidth required id="phone_number" label="Phone Number" variant="outlined" onChange={e => setPhoneNumber(e.target.value)}/>
                 </Grid>
-                <Grid item className={classes.gridItem}>
+                {/* <Grid item className={classes.gridItem}>
                     <Typography variant="subtitle1">PAYMENT INFORMATION</Typography>
                     <Grid className={classes.stripGrid}>
                     <Typography variant="body1">
@@ -213,11 +244,45 @@ const OnboardingForm = (props) => {
                         Click <strong>Save and continue</strong> to set up your payments on Stripe.
                     </Typography>
                     </Grid>
-                </Grid>
+                </Grid> */}
                 <Grid item className={classes.btnGrid}>
                     <Button type="submit" fullWidth className={classes.btn} onClick={ e =>  {initStripe(e)} }>SAVE AND CONTINUE</Button>
                 </Grid>
             </form>
+            <div>
+      
+      {/* <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+          <Grid item className={classes.gridItem}>
+                    <Typography variant="subtitle1">PAYMENT INFORMATION</Typography>
+                    <Grid className={classes.stripGrid}>
+                    <Typography variant="body1">
+                        We use Stripe to make sure you get paid on time and to keep your personal bank and details secure. 
+                        Click <strong>Save and continue</strong> to set up your payments on Stripe.
+                    </Typography>
+                    <a href={`${axios}stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&zip=${zip}&state=${state}&country=US`}>connect stripe</a>
+
+                    </Grid>
+
+    
+    </Grid>
+          </div>
+        </Fade>
+      </Modal> */}
+    </div>
+    
         </Grid>
     )
 };

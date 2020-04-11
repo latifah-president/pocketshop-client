@@ -30,7 +30,7 @@ export default (state = initialState, actions) => {
                 ...state,
                 email: actions.payload.email,
                 firebase_id: actions.payload.firebase_id,
-                user_type: actions.payload.firebase_id,
+                user_type: actions.payload.user_type,
                 first_name: actions.payload.first_name,
                 last_name: actions.payload.last_name,
                 street_address: actions.payload.street_address,
@@ -60,12 +60,12 @@ export default (state = initialState, actions) => {
             case authTypes.REGISTER_SUCCESS:
                 return {
                     ...state,
-                    user: {
-                        ...state.user,
+                    // user: {
+                        // ...state.user,
                         email: actions.payload.email,
                         firebase_id: actions.payload.firebase_id,
-                        user_type: actions.payload.user_type
-                    },
+                        user_type: actions.payload.user_type,
+                    // },
                     loading: false,
                     error: false,
                     loggedIn: true,
