@@ -102,7 +102,7 @@ export default (state = initialState, actions) => {
                     loggedIn: false,
                     onboarded: false,
                 }
-                    case vendorTypes. STRIPE_ONBOARDING_START:
+                    case vendorTypes.STRIPE_ONBOARDING_START:
                         return {
                             ...state,
                             loading: true

@@ -88,9 +88,10 @@ const NavBar = (props) => {
   const firebase_id = useSelector(state => state.user.firebase_id);
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-
+  const vendor_name = localStorage.getItem("vendor_name")
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -109,12 +110,11 @@ const NavBar = (props) => {
   }
   const logout = () => {
     auth.signOut();
-    localStorage.clear();
-    props.history.push("/");
+    props.history.push(`/${vendor_name}`);
   }
   
   const profile = () => {
-    
+
   }
   const menuId = 'profile';
 console.log("is logged in?", loggedIn)
@@ -186,7 +186,7 @@ console.log("is logged in?", loggedIn)
     <div className={classes.root}>
       <AppBar className={classes.nav} position="fixed">
         <Toolbar className={classes.toolBar}>
-          <NavLink to="/" className={classes.title}>
+          <NavLink to={`/${vendor_name}`} className={classes.title}>
             <Typography variant="h4" >
                 3rd Eye
             </Typography>
@@ -215,6 +215,7 @@ console.log("is logged in?", loggedIn)
           <Grid className={loggedIn ? `${classes.hide}` : `${classes.icons}`} xs={"auto"}>
             <Button className={classes.btn} color="inherit"><NavLink className={classes.whiteLink} to="/registration/customer">Register</NavLink></Button>
             <Button className={classes.btn} color="inherit">Login</Button>
+            <Button onClick={logout}>Log Out </Button>
           </Grid> 
           <div className={classes.sectionMobile}>
             <IconButton

@@ -31,21 +31,6 @@ export const init0auth = (email, uid, idToken) => dispatch => {
             type: authTypes.AUTH_FAIL
         })
     }
-  
-    // axios.get(`http://localhost:5000/users`)
-    //     .then(res => {
-    //         console.log(res.data, 'res.data.users')
-    //         dispatch({
-    //             type: authTypes.AUTH_SUCCESS,
-    //             payload: res.data
-    //         })
-    //     })
-    //         .catch( err => {
-    //             dispatch({
-    //                 type: authTypes.AUTH_FAIL,
-    //                 payload: err
-    //             })
-    //         })
 };
 
 export const register = (userObj) =>  (dispatch) => {
@@ -71,7 +56,8 @@ export const register = (userObj) =>  (dispatch) => {
             payload: data
         })
     }
-   }) .catch( err => {
+   })
+   .catch( err => {
     dispatch({
         type: authTypes.REGISTER_FAIL,
         payload: err

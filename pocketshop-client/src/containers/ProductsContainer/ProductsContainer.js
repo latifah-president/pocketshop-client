@@ -1,4 +1,5 @@
 import React from "react";
+import {useSelector, useDispatch} from 'react-redux';
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -8,50 +9,50 @@ import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
 
 import "./styles.css";
 
-const products = [
-  {
-    name: "apple",
-    price: 2.0,
-    description: "first product",
-    imageUrl:
-      "https://image.shutterstock.com/image-photo/red-apple-isolated-on-white-260nw-1498042211.jpg",
-  },
-  {
-    name: "watermelon",
-    price: 2.0,
-    description: "second product",
-    imageUrl:
-      "https://images-na.ssl-images-amazon.com/images/I/71ogcdh7YjL._AC_SY450_.jpg",
-  },
-  {
-    name: "pineapple",
-    price: 2.0,
-    description: "third product",
-    imageUrl:
-      "https://i.dailymail.co.uk/i/newpix/2018/03/08/11/49FF748700000578-5476901-image-a-27_1520507605152.jpg",
-  },
-  {
-    name: "bananas",
-    price: 3.0,
-    description: "fifth product",
-    imageUrl:
-      "https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-320-80.jpg",
-  },
-  {
-    name: "strawberries",
-    price: 4.0,
-    description: "fourth product",
-    imageUrl:
-      "https://www.almanac.com/sites/default/files/image_nodes/strawberries-1.jpg",
-  },
-  {
-    name: "bananas",
-    price: 3.0,
-    description: "fifth product",
-    imageUrl:
-      "https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-320-80.jpg",
-  },
-];
+// const products = [
+//   {
+//     name: "apple",
+//     price: 2.0,
+//     description: "first product",
+//     imageUrl:
+//       "https://image.shutterstock.com/image-photo/red-apple-isolated-on-white-260nw-1498042211.jpg",
+//   },
+//   {
+//     name: "watermelon",
+//     price: 2.0,
+//     description: "second product",
+//     imageUrl:
+//       "https://images-na.ssl-images-amazon.com/images/I/71ogcdh7YjL._AC_SY450_.jpg",
+//   },
+//   {
+//     name: "pineapple",
+//     price: 2.0,
+//     description: "third product",
+//     imageUrl:
+//       "https://i.dailymail.co.uk/i/newpix/2018/03/08/11/49FF748700000578-5476901-image-a-27_1520507605152.jpg",
+//   },
+//   {
+//     name: "bananas",
+//     price: 3.0,
+//     description: "fifth product",
+//     imageUrl:
+//       "https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-320-80.jpg",
+//   },
+//   {
+//     name: "strawberries",
+//     price: 4.0,
+//     description: "fourth product",
+//     imageUrl:
+//       "https://www.almanac.com/sites/default/files/image_nodes/strawberries-1.jpg",
+//   },
+//   {
+//     name: "bananas",
+//     price: 3.0,
+//     description: "fifth product",
+//     imageUrl:
+//       "https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-320-80.jpg",
+//   },
+// ];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -88,7 +89,11 @@ const useStyles = makeStyles((theme) => ({
 // range         |   xs   |   sm   |   md   |   lg   |   xl
 
 const ProductsContainer = (props) => {
+  // console.log(products, "products from products list")
+  const dispatch = useDispatch();
+  console.log("props from products list" ,props)
   const classes = useStyles();
+
   console.log("width", props.width);
   const getGridListCols = () => {
     if (isWidthUp("xl", props.width)) {
@@ -114,7 +119,7 @@ const ProductsContainer = (props) => {
         cellHeight={380}
         className={classes.gridList}
       >
-        {products.map((product) => (
+        {props.vendorProducts.map((product) => (
           <GridListTile className={classes.gridListTile}>
             <ProductCard
               product={product}

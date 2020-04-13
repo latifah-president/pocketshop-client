@@ -14,19 +14,6 @@ export const VendorRegistration = (userObj) => (dispatch) => {
         .then(res => {
             console.log("user from init0auth 201:", res.data)
             console.log("vendor data", res.data)
-            const data = {
-                firebase_id: userObj.firebase_id,
-                vendor_name: userObj.vendor_name,
-                first_name: userObj.first_name,
-                last_name: userObj.last_name,
-                user_type: userObj.user_type,
-                street_address: userObj.street_address,
-                city: userObj.city,
-                state: userObj.state,
-                zip: userObj.zip,
-                country: userObj.country,
-                phone_number: userObj.phone_number
-            }
             dispatch({
                 type: authTypes.VENDOR_REG_SUCCESS,
                 payload: res.data

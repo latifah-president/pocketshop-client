@@ -84,12 +84,12 @@ export const ProductCard = ({ product }) => {
     <Card square variant="outlined" className={classes.root}>
         <CardMedia
         className={classes.media}
-        image={product.imageUrl}
+        image={product.image_url}
         title={product.name}
       />
        <CardContent>
         <Typography variant="h5"  component="h5">
-          {product.name}
+          {product.title}
         </Typography>
         <Typography  variant="caption" gutterBottom >
           {product.description}
