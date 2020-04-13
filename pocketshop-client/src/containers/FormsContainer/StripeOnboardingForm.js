@@ -188,12 +188,12 @@ const OnboardingForm = (props) => {
         }
         // handleOpen()
         dispatch(VendorRegistration(userObj))
-        window.location.replace(`http://localhost:8585/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&zip=${zip}&state=${state}&country=US`)
+        window.location.replace(`https://pocket-shop.herokuapp.com/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&zip=${zip}&state=${state}&country=US`)
 
     }
 
     // const redirectToStripe = () => {
-    //     window.location.href = `http://localhost:8585/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&zip=${zip}&state=${state}&country=US`
+    //     window.location.href = `https://pocket-shop.herokuapp.com/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&zip=${zip}&state=${state}&country=US`
     
     //     }
     const handleOpen = () => {

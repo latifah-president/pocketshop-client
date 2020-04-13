@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import "./styles.css";
 
 export const RegistrationFormOverlay = () => (
-  <div className="overlay-container">
+  <div className="overlay-container" style={{border: "1px soloid red"}}>
     <div className="overlay">
       <div className="overlay-panel overlay-left">
         <h1>Welcome Back!</h1>
