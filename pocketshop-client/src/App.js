@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "./axiosinstance";
 import { Switch, Route, withRouter } from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux';
-import { VendorRegistrationPage } from "./pages/VendorRegistrationPage/VendorRegistrationPage";
+import  VendorRegistrationPage  from "./pages/VendorRegistrationPage/VendorRegistrationPage";
 import { CustomerRegistrationPage } from "./pages/CustomerRegistrationPage/CustomerRegistrationPage";
 import VendorProfile from "./pages/VendorProfilePage/VendorProfile";
 import StripeOnboarding from "./pages/StripeOnboarding/Onboarding";
@@ -19,25 +19,6 @@ function App(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const dispatch = useDispatch();
-
-  const stateChange = () => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
-        const { email, uid }= user
-        console.log("state change user", user)
-          firebase.auth().currentUser.getIdToken()
-          .then(idToken => {
-            axios.defaults.headers.common["Authorization"] = idToken;
-              dispatch(init0auth(email, uid, idToken))
-              setIsLoggedIn(true)
-          })
-          .catch(err => {
-              console.log(err.message)
-              setIsLoggedIn(false)
-          })
-      }
-  })
-  }
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {

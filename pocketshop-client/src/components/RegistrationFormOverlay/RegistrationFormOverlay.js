@@ -1,41 +1,34 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from '@material-ui/core/Grid';
+import registrationImage from "./../../assets/images/mike-petrucci-c9FQyqIECds-unsplash.jpg";
+// import "./styles.css";
 
-import "./styles.css";
+const useStyles = makeStyles((theme) => ({
+  wrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexGrow: 1,
+    // border: "3px solid  green",
+    height: "100%",
+    top: "80px",
+    backgroundImage: `url(${registrationImage})`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center center",
+    backgroundSize: "cover",
+    height: "100%",
+    [theme.breakpoints.down('sm')]: {
+      width: "100%",
+    }
+  },
+}))
+const  RegistrationFormOverlay = () => {
+  const classes = useStyles();
+return (
+  <Grid container item className={classes.wrapper} xs={12}></Grid>
+)
+ };
 
-export const RegistrationFormOverlay = () => (
-  <div className="overlay-container" style={{border: "1px soloid red"}}>
-    <div className="overlay">
-      <div className="overlay-panel overlay-left">
-        <h1>Welcome Back!</h1>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            const container = document.getElementById("container");
-            container.classList.remove("right-panel-active");
-          }}
-          className="ghost"
-          id="signIn"
-        >
-          Sign In
-        </Button>
-      </div>
-      <div className="overlay-panel overlay-right">
-        <h1>Hello, Friend!</h1>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            const container = document.getElementById("container");
-            container.classList.add("right-panel-active");
-          }}
-          // className="ghost"
-          id="signUp"
-        >
-          Sign Up
-        </Button>
-      </div>
-    </div>
-  </div>
-);
+
+ export default RegistrationFormOverlay;

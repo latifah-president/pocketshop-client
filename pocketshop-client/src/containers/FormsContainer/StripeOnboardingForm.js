@@ -154,8 +154,8 @@ const useStyles = makeStyles((theme) => ({
 const OnboardingForm = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const [first_name, setFirstName] = useState("");
-    const [last_name, setLastName] = useState("");
+    // const [first_name, setFirstName] = useState("");
+    // const [last_name, setLastName] = useState("");
     const [vendor_name, setVendorName] = useState("")
     const [street_address, setStreetAdd] = useState("");
     const [city, setCity] = useState("");
@@ -166,6 +166,9 @@ const OnboardingForm = (props) => {
     const email = useSelector(state => state.user.email);
     const user_type = useSelector(state => state.user.user_type);
     const firebase_id = useSelector(state => state.user.firebase_id);
+    const first_name = useSelector(state => state.user.first_name);
+    const last_name = useSelector(state => state.user.last_name);
+
 
     console.log(firebase_id, "firebase onboarding")
     const inputLabel =useRef(null);
@@ -192,11 +195,7 @@ const OnboardingForm = (props) => {
         // window.location.replace(`https://pocket-shop.herokuapp.com/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&zip=${zip}&state=${state}&country=US`)
 
     }
-
-    // const redirectToStripe = () => {
-    //     window.location.href = `https://pocket-shop.herokuapp.com/stripe/authorize/?business_type=individual&business_name=${vendor_name}&first_name=${first_name}&last_name=${last_name}&email=${email}&street_address=${street_address}&city=${city}&zip=${zip}&state=${state}&country=US`
     
-    //     }
     const handleOpen = () => {
         setOpen(true);
       };
@@ -208,11 +207,11 @@ const OnboardingForm = (props) => {
         <Grid container className={classes.root}>
             <Typography className={classes.header} variant="h4">Complete your profile</Typography>
             <form className={classes.form}>
-                <Grid item className={classes.gridItem}>
+                {/* <Grid item className={classes.gridItem}>
                     <Typography variant="subtitle1">PERSONAL INFORMATION</Typography>
                     <TextField className={classes.textField}  fullWidth required id="first_name" label="First Name" variant="outlined" value={first_name} onChange={e => setFirstName(e.target.value)}/>
                     <TextField className={classes.textField}  fullWidth required id="last_name" label="Last Name" variant="outlined" value={last_name} onChange={e => setLastName(e.target.value)}/>
-                </Grid>
+                </Grid> */}
                 <Grid item className={classes.gridItem}>
                     <Typography variant="subtitle1">BUSINESS INFORMATION</Typography>
                         <TextField className={classes.textField}  fullWidth required id="vendor_name" label="Business Name" variant="outlined" value={vendor_name} onChange={e => setVendorName(e.target.value)}/>
@@ -237,7 +236,7 @@ const OnboardingForm = (props) => {
                     <TextField className={classes.textField}  fullWidth required id="Zip_Code" label="Zip Code" variant="outlined" onChange={e => setZip(e.target.value)}/>
                     <TextField className={classes.textField}  fullWidth required id="phone_number" label="Phone Number" variant="outlined" onChange={e => setPhoneNumber(e.target.value)}/>
                 </Grid>
-                {/* <Grid item className={classes.gridItem}>
+                <Grid item className={classes.gridItem}>
                     <Typography variant="subtitle1">PAYMENT INFORMATION</Typography>
                     <Grid className={classes.stripGrid}>
                     <Typography variant="body1">
@@ -245,7 +244,7 @@ const OnboardingForm = (props) => {
                         Click <strong>Save and continue</strong> to set up your payments on Stripe.
                     </Typography>
                     </Grid>
-                </Grid> */}
+                </Grid>
                 <Grid item className={classes.btnGrid}>
                     <Button type="submit" fullWidth className={classes.btn} onClick={ e =>  {initStripe(e)} }>SAVE AND CONTINUE</Button>
                 </Grid>

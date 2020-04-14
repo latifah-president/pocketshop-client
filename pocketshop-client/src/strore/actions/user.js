@@ -13,22 +13,29 @@ export const init0auth = (email, uid, idToken) => dispatch => {
                 axios.get(`/vendor/${uid}`)
                 .then(res => {
                     console.log("vendor res data", res.data)
-                    // console.log("res spread ", ...res.data)
                     dispatch({
                         type: authTypes.AUTH_SUCCESS,
                         payload: res.data
                     })
                 })
+                .catch(err => {
+                    dispatch({
+                        type: authTypes.AUTH_FAIL,
+                        payload: err
+                    })
+                })
             }
         })
-        // const data = { email, uid, user_type }
-        // dispatch ({
-        //     type: authTypes.AUTH_SUCCESS,
-        //     payload: data
-        // })
+        .catch(err => {
+            dispatch({
+                type: authTypes.AUTH_FAIL,
+                payload: err
+            })
+        })
     } else {
         dispatch ({
-            type: authTypes.AUTH_FAIL
+            type: authTypes.AUTH_FAIL,
+            payload: "No uid provided"
         })
     }
 };
@@ -44,9 +51,9 @@ export const register = (userObj) =>  (dispatch) => {
     .then(res =>{
     console.log(res.data, 'res.data.users')
     if (res.status === 201) {
-        console.log("user from init0auth 201:", userObj)
-
         const data = {
+            first_name: userObj.first_name,
+            last_name: userObj.last_name,
             email: userObj.email,
             firebase_id: userObj.firebase_id,
             user_type: userObj.user_type
@@ -54,6 +61,11 @@ export const register = (userObj) =>  (dispatch) => {
         dispatch({
             type: authTypes.REGISTER_SUCCESS,
             payload: data
+        })
+    } else if (res.status === 400) {
+        dispatch({
+            type: authTypes.REGISTER_FAIL,
+            payload: res.data
         })
     }
    })
@@ -63,23 +75,6 @@ export const register = (userObj) =>  (dispatch) => {
         payload: err
     })
 })
-        // if (user.email) {
-        //     const response = await axios.post("/vendor/register", { ...user }).then(res => res.data)
-        //   console.log("data from register", )
-        //         dispatch({
-        //             type: authTypes.AUTH_SUCCESS,
-        //             payload: {usertest: "test"}
-        //         })
-         
-            // .catch( err => {
-            //     dispatch({
-            //         type: authTypes.AUTH_FAIL,
-            //         payload: err
-            //     })
-            // })
-        //}
-  
-  
     
 }
 export default {

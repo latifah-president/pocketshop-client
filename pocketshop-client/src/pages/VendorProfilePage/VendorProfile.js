@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      border: "3px solid red"
+    //   border: "3px solid red"
     },
     form: {
         display: "flex",
@@ -72,13 +72,13 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     vendorInfo: {
-        border: "1px solid black",
+        // border: "1px solid black",
         alignItems: "center",
         justifyContent: "space-around"
 
     },
     vendorDetails: {
-        border: "1px solid green",
+        // border: "1px solid green",
         display: "flex",
         justifyContent: "space-around",
         padding: theme.spacing(2),

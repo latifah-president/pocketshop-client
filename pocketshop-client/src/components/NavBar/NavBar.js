@@ -214,8 +214,8 @@ console.log("is logged in?", loggedIn)
           </Grid>   
           <Grid className={loggedIn ? `${classes.hide}` : `${classes.icons}`} xs={"auto"}>
             <Button className={classes.btn} color="inherit"><NavLink className={classes.whiteLink} to="/registration/customer">Register</NavLink></Button>
-            <Button className={classes.btn} color="inherit">Login</Button>
-            <Button onClick={logout}>Log Out </Button>
+            <Button className={loggedIn ? `${classes.hide}` : `${classes.btn}`}  color="inherit">Login</Button>
+            <Button onClick={logout} className={loggedIn ? `${classes.btn}` : `${classes.hide}`} >Log Out </Button>
           </Grid> 
           <div className={classes.sectionMobile}>
             <IconButton
