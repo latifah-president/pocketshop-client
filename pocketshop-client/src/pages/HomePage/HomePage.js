@@ -27,6 +27,7 @@ import {mainBtnColor} from "./../../global-styles/styles";
 import {getStripeToken, updateVendor} from "./../../strore/actions/vendor"
 
 import "./styles.css";
+import { getVendorProducts } from "../../strore/actions/products";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -60,18 +61,23 @@ const HomePage = (props) => {
   };
   const userfirebase_id = useSelector(state => state.user.firebase_id)
   const firebase_id = localStorage.getItem("firebase_id")
-
+  const vendor_name = props.match.params.vendor_name;
   const loggedIn = useSelector(state => state.vendor.loggedIn)
   const user_type = useSelector(state => state.user.user_type)
   const stripeId= useSelector(state => state.vendor.stripe_id)
   let params = queryString.parse(props.location.search)
   let stripe_id = params.code
+  const products = useSelector(state => state.products.products);
+  const isLoaded = useSelector(state => state.products.productsLoaded);
+
+
 
   // console.log(stripeSuccess)
-  // console.log('params with code:', firebase_id)
+  console.log('homepage products', products)
   console.log(" firebase_id", firebase_id)
   console.log(" firebase_id", userfirebase_id)
-
+  console.log("props.params", props.match.params.vendor_name)
+  localStorage.setItem("vendor_name", vendor_name)
   const getStripeToken = () => {
     // let params = queryString.parse(props.location.search)
     let stripeToken = params.code
@@ -86,24 +92,7 @@ const HomePage = (props) => {
           console.log("Stipe Onboarding Completed!", stripe_id)
           console.log("Stipe respoonse!", res.data, firebase_id)
           dispatch(updateVendor(firebase_id, {stripe_id: res.data}))
-          // setStripeSuccess(true)
-          //TODO: REMOVE PUT REQUEST AND HANDLE UPDATING THE VENDOR'S STRIPE INFO ON FRONTEND
-          // axios.put(`/vendor/${firebase_id}`, {stripe_id: res.data.stripe_user_id})
-          // .then(res => {
-          //   if (res.status === 200) {
-          //     console.log("The vendor's stripe id has been added!", {stripe_id: stripe_id})
-          //     console.log("The vendor's stripe id has been added! params", stripe_id)
-
-          //   }
-          // })
-          // .catch (err => {
-          //   console.log("The vendor's stripe id was not added:", err)
-          //   //TODO: IF STRIPE VENDOR ON BOARDING FAILS SET STRIPE_FALE TO TRUE
-          //   // IF TRUE A POPUP SHOULD SHOW UP ASKING THE VENDOR TO SIGN IN AGAIN
-          //   //ONCE CLICKED THE INIT STRIPE FUNCTION SHOULD BE LAUNCHED
-          // })
         } else {
-          // setStripeSuccess(false)
           console.log("fail");
         }
       })
@@ -113,6 +102,7 @@ const HomePage = (props) => {
   }
 
   useEffect (() => {
+    dispatch(getVendorProducts(vendor_name))
     if (user_type === "vendor" && !stripeId) {
       console.log("init stripe")
       console.log("init stripe, ", userfirebase_id)
@@ -122,7 +112,7 @@ const HomePage = (props) => {
       return () => {
         console.log("unsubscribe ")
       }
-  }, )
+  }, [isLoaded])
 
   return (
     <div className="home-page">
@@ -133,6 +123,7 @@ const HomePage = (props) => {
       <ProductsContainer
         cartItems={cartItems}
         setCartItems={setCartItems}
+        vendorProducts={products}
       ></ProductsContainer>
     </div>
   );

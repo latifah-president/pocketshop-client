@@ -23,7 +23,8 @@ export default (state = initialState, actions) => {
         case authTypes.AUTH_START:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                error: false
             }
         case authTypes.AUTH_SUCCESS:
             return {
@@ -44,14 +45,13 @@ export default (state = initialState, actions) => {
                 loggedIn: true,
             }
   
-            // case authTypes.AUTH_FAIL:
-            //     return {
-            //         ...state,
-            //         user: null,
-            //         loading: false,
-            //         error: actions.payload,
-            //         loggedIn: false,
-            //     }
+            case authTypes.AUTH_FAIL:
+                return {
+                    ...state,
+                    loading: false,
+                    error: actions.payload,
+                    loggedIn: false,
+                }
             case authTypes.REGISTER_START:
                     return {
                         ...state,
@@ -60,12 +60,9 @@ export default (state = initialState, actions) => {
             case authTypes.REGISTER_SUCCESS:
                 return {
                     ...state,
-                    // user: {
-                        // ...state.user,
-                        email: actions.payload.email,
-                        firebase_id: actions.payload.firebase_id,
-                        user_type: actions.payload.user_type,
-                    // },
+                    email: actions.payload.email,
+                    firebase_id: actions.payload.firebase_id,
+                    user_type: actions.payload.user_type,
                     loading: false,
                     error: false,
                     loggedIn: true,
@@ -73,7 +70,6 @@ export default (state = initialState, actions) => {
             case authTypes.REGISTER_FAIL:
                 return {
                     ...state,
-                    user: null,
                     loading: false,
                     error: actions.payload,
                     loggedIn: false,

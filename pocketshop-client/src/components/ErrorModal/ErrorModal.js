@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import Button from "@material-ui/core/Button";
+import { mainBtnColor, GreenRadient } from '../../global-styles/styles';
+
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -16,11 +19,22 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  btn: {
+    margin: theme.spacing(2, 0),
+    color: "white",
+    width: "60%",
+    backgroundColor: `${GreenRadient}`,
+
+    "&:hover": {
+      backgroundColor: `${mainBtnColor}`,
+
+    }
+  }
 }));
 
-export default function TransitionsModal() {
+export default function TransitionsModal(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const handleOpen = () => {
     setOpen(true);
@@ -32,9 +46,6 @@ export default function TransitionsModal() {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        
-      </button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -49,10 +60,14 @@ export default function TransitionsModal() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Transition modal</h2>
-            <p id="transition-modal-description">react-transition-group animates me.</p>
+      <h2 id="transition-modal-title">{props.errorTitle}</h2>
+      <p id="transition-modal-description">{props.errorMessage}</p>
+      <Button type="button" onClick={handleClose} className={classes.btn}>
+          Close
+        </Button>
           </div>
         </Fade>
+       
       </Modal>
     </div>
   );

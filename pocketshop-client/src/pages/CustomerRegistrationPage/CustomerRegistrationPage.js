@@ -9,7 +9,7 @@ import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 import SignUpForm from "../../containers/FormsContainer/CustomerRegistrationFormContainer";
 import SignInForm from "../../containers/FormsContainer/LoginFormContainer";
-import { RegistrationFormOverlay } from "../../components/RegistrationFormOverlay/RegistrationFormOverlay";
+import  RegistrationFormOverlay  from "../../components/RegistrationFormOverlay/RegistrationFormOverlay";
 
 import history from "../../history";
 

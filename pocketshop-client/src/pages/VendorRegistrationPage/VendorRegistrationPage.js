@@ -2,7 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SignUpForm from "../../containers/FormsContainer/VendorRegistrationFormContainer";
 import SignInForm from "../../containers/FormsContainer/LoginFormContainer";
-import { RegistrationFormOverlay } from "../../components/RegistrationFormOverlay/RegistrationFormOverlay";
+import Grid from "@material-ui/core/Grid";
+import RegistrationFormOverlay from "../../components/RegistrationFormOverlay/RegistrationFormOverlay";
 import "./styles.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -15,21 +16,30 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   root: {
-    "& > *": {
-      margin: theme.spacing(1),
-      width: 200,
+    display: "flex",
+    flexGrow: 1,
+    // border: "1px solid orange",
+    marginTop: "4rem",
+    height: "100vh",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
     },
   },
 }));
 
 const handleSubmit = () => {};
 
-export const VendorRegistrationPage = () => {
+const VendorRegistrationPage = () => {
+  const classes = useStyles();
+
   return (
-    <div className="registration-container" id="container">
+    <Grid className={classes.root}>
+      <RegistrationFormOverlay />
+
       <SignUpForm handleSubmit={handleSubmit} />
-      <SignInForm handleSubmit={handleSubmit} />
-      <RegistrationFormOverlay></RegistrationFormOverlay>
-    </div>
+      {/* <SignInForm handleSubmit={handleSubmit} /> */}
+    </Grid>
   );
 };
+
+export default VendorRegistrationPage;
