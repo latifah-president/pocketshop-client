@@ -1,25 +1,25 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import SignUpForm from "../../containers/FormsContainer/RegistrationFormContainer";
+import SignUpForm from "../../containers/FormsContainer/VendorRegistrationFormContainer";
 import SignInForm from "../../containers/FormsContainer/LoginFormContainer";
 import { RegistrationFormOverlay } from "../../components/RegistrationFormOverlay/RegistrationFormOverlay";
 import "./styles.css";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
-    maxWidth: 280
+    maxWidth: 280,
   },
   selectEmpty: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   root: {
     "& > *": {
       margin: theme.spacing(1),
-      width: 200
-    }
-  }
+      width: 200,
+    },
+  },
 }));
 
 const handleSubmit = () => {};
