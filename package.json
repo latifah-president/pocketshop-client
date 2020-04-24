@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "@material-ui/icons": "^4.9.1"
+    "@material-ui/icons": "^4.9.1",
+    "react-geocode": "^0.2.1",
+    "react-google-autocomplete": "^1.1.4",
+    "react-google-maps": "^9.4.5"
   }
 }
